@@ -6,55 +6,145 @@
 
 body {
     font-family: sans-serif;
-    color: #333;
-    background-color: #f5f5f5;
+    background-color: #b8ddd8;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
 }
 
-header {
-    background-color: #2c7a4b;
+/* ── HEADER ── */
+
+.header {
+    background-color: #1a6b8a;
     color: white;
-    padding: 20px 40px;
+    padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-header h1 {
-    font-size: 1.5rem;
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 0.95rem;
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
 }
 
-nav a:hover {
-    text-decoration: underline;
+.logo-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: 0.01em;
+}
+
+.header-weather {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.weather-icon {
+    width: 36px;
+    height: 30px;
+    flex-shrink: 0;
+}
+
+.weather-text {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0.95;
+}
+
+/* ── MAIN ── */
+
+.main-content {
+    flex: 1;
+    padding: 24px 20px;
 }
 
 .hero {
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 20px;
 }
 
 .hero h2 {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    color: #2c7a4b;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #1a6b8a;
 }
 
 .hero p {
-    font-size: 1.1rem;
-    color: #666;
+    font-size: 1rem;
+    color: #555;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.85rem;
-    color: #999;
-    border-top: 1px solid #ddd;
-    margin-top: 60px;
+/* ── FOOTER ── */
+
+.footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px 20px;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.footer-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-btn svg {
+    width: 28px;
+    height: 28px;
+}
+
+.footer-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -30px;
+}
+
+.footer-map-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #1a6b8a;
+    border: 4px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(26, 107, 138, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.footer-map-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px rgba(26, 107, 138, 0.3);
+}
+
+.footer-map-btn svg {
+    width: 32px;
+    height: 32px;
 }
