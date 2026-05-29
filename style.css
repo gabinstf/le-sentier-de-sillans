@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Marky';
+    src: url('fonts/marky.otf') format('opentype'),
+         url('fonts/marky.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Outfit';
+    src: url('fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,13 +20,29 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
     background-color: #b8ddd8;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     max-width: 430px;
     margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: 'Marky', sans-serif;
+    font-weight: normal;
+}
+
+h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
 }
 
 /* ── HEADER ── */
@@ -41,6 +72,7 @@ body {
 }
 
 .logo-text {
+    font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
     line-height: 1.3;
@@ -79,13 +111,16 @@ body {
 }
 
 .hero h2 {
+    font-family: 'Marky', sans-serif;
     font-size: 1.8rem;
     margin-bottom: 12px;
     color: #1a6b8a;
 }
 
 .hero p {
+    font-family: 'Outfit', sans-serif;
     font-size: 1rem;
+    font-weight: 400;
     color: #555;
 }
 
