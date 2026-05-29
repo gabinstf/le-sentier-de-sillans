@@ -22,7 +22,7 @@
 body {
     font-family: 'Outfit', sans-serif;
     font-weight: 400;
-    background-color: #b8ddd8;
+    background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -48,12 +48,13 @@ p {
 /* ── HEADER ── */
 
 .header {
-    background-color: #1a6b8a;
+    background-color: #03658C;
     color: white;
     padding: 14px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid #48ADCC;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -114,7 +115,7 @@ p {
     font-family: 'Marky', sans-serif;
     font-size: 1.8rem;
     margin-bottom: 12px;
-    color: #1a6b8a;
+    color: #03658C;
 }
 
 .hero p {
@@ -127,8 +128,8 @@ p {
 /* ── FOOTER ── */
 
 .footer {
-    background-color: #ffffff;
-    border-top: 1px solid #e0e0e0;
+    background-color: #F2F2F2;
+    border-top: 2px solid #48ADCC;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -164,8 +165,8 @@ p {
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background-color: #1a6b8a;
-    border: 4px solid #ffffff;
+    background-color: #03658C;
+    border: 4px solid #F2F2F2;
     box-shadow: 0 4px 12px rgba(26, 107, 138, 0.4);
     cursor: pointer;
     display: flex;
