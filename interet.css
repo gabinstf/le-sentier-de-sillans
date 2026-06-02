@@ -1,0 +1,242 @@
+.main-content {
+    padding: 0;
+}
+
+/* ── BOUTON RETOUR ── */
+
+.back-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.back-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ── GALERIE ── */
+
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+.gallery-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+.gallery-slide {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.gallery-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.slide-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-placeholder svg {
+    width: 64px;
+    height: 64px;
+    opacity: 0.28;
+}
+
+.gallery-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.gallery-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+}
+
+.gallery-dot.active {
+    background: white;
+    transform: scale(1.25);
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.38);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+/* ── NAVIGATION INTER-POI ── */
+
+.poi-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18px 0;
+}
+
+.poi-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: #48ADCC;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 0;
+}
+
+.poi-nav-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.poi-nav-btn:disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.poi-nav-count {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #aaa;
+}
+
+/* ── CONTENU ── */
+
+.poi-content {
+    padding: 14px 18px 28px;
+}
+
+.poi-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.poi-title {
+    font-family: 'Marky', sans-serif;
+    font-size: 1.85rem;
+    line-height: 1.15;
+    margin-top: 8px;
+}
+
+.poi-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.poi-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #555;
+    background: #fff;
+    border: 1px solid #dde8ed;
+    border-radius: 20px;
+    padding: 5px 11px 5px 8px;
+}
+
+.poi-meta-item svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.poi-divider {
+    height: 1px;
+    background: linear-gradient(to right, #48ADCC33, #48ADCC, #48ADCC33);
+    margin: 18px 0;
+}
+
+.poi-section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #48ADCC;
+    margin-bottom: 8px;
+}
+
+.poi-description {
+    font-size: 0.95rem;
+    line-height: 1.68;
+    color: #333;
+}
+
+.poi-description p + p {
+    margin-top: 10px;
+}
+
+.poi-tip {
+    border-left: 3px solid;
+    border-radius: 0 10px 10px 0;
+    padding: 13px 14px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.poi-tip strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
