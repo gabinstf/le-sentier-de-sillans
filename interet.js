@@ -7,7 +7,7 @@ const POIS = [
         title: "L'Église",
         tag: "Point de départ",
         tagBg: "#e0f3f9", tagColor: "#03658C",
-        etape: "1 / 14", temps: "3 min", km: "0,0",
+        etape: "1 / 10", temps: "3 min", km: "0,0",
         images: [
             { src: null, alt: "Façade de l'église de Sillans",  grad: "linear-gradient(160deg,#48ADCC,#03658C)" },
             { src: null, alt: "Place du village",                grad: "linear-gradient(160deg,#6e8cad,#3a5a7a)" },
@@ -20,10 +20,10 @@ const POIS = [
     },
     {
         id: 2,
-        title: "Le Bastidon et l'oliveraie",
+        title: "Le Bastidon de l'oliveraie",
         tag: "Patrimoine agricole",
         tagBg: "#e8f4ee", tagColor: "#1a6b3a",
-        etape: "2 / 14", temps: "5 min", km: "0,2",
+        etape: "2 / 10", temps: "5 min", km: "0,2",
         images: [
             { src: null, alt: "Le bastidon provençal",           grad: "linear-gradient(160deg,#5a9c6e,#2a6c3e)" },
             { src: null, alt: "Oliviers centenaires",            grad: "linear-gradient(160deg,#7aad6e,#3a7c4e)" },
@@ -37,26 +37,10 @@ const POIS = [
     },
     {
         id: 3,
-        title: "Canaux d'irrigation en travertin",
-        tag: "Patrimoine agricole",
-        tagBg: "#e8f4ee", tagColor: "#1a6b3a",
-        etape: "3 / 14", temps: "5 min", km: "0,5",
-        images: [
-            { src: null, alt: "Canal en travertin",              grad: "linear-gradient(160deg,#8cad7a,#5a7c4a)" },
-            { src: null, alt: "Détail de la roche",              grad: "linear-gradient(160deg,#ad9c6e,#7c6c3a)" },
-        ],
-        description: [
-            "Ce réseau de canaux taillés dans le travertin est un chef-d'œuvre d'ingénierie paysanne. L'eau captée sur la Bresque était acheminée par gravité jusqu'aux parcelles cultivées en contrebas, permettant l'irrigation des jardins et des vergers tout au long de l'été.",
-            "Le travertin — une roche calcaire sédimentaire — était le matériau idéal : naturellement disponible, facile à travailler et imperméable une fois poli. Ces canaux fonctionnèrent pendant plusieurs siècles avant d'être progressivement abandonnés au XXe siècle.",
-        ],
-        tip: { title: "Géologie", color: "#8c7a2a", bg: "#f7f3e8", text: "Le travertin se forme par précipitation du carbonate de calcium contenu dans les eaux chargées en minéraux. C'est le même processus qui crée les stalactites dans les grottes." }
-    },
-    {
-        id: 4,
         title: "Le tuff",
         tag: "Géologie",
         tagBg: "#f7f3e8", tagColor: "#6b5a1a",
-        etape: "4 / 14", temps: "5 min", km: "0,8",
+        etape: "3 / 10", temps: "5 min", km: "0,8",
         images: [
             { src: null, alt: "Murets en tuf",                   grad: "linear-gradient(160deg,#c4ad7a,#8c7c4a)" },
             { src: null, alt: "Surface poreuse du tuf",          grad: "linear-gradient(160deg,#d4bc8a,#9c8c5a)" },
@@ -68,11 +52,11 @@ const POIS = [
         tip: { title: "Observation", color: "#6b5a1a", bg: "#f7f3e8", text: "Regardez attentivement la surface des murets : on peut parfois y deviner les empreintes de feuilles ou de tiges végétales fossilisées dans la roche il y a des millénaires." }
     },
     {
-        id: 5,
-        title: "Panorama de la cascade",
+        id: 4,
+        title: "Panorama et banc",
         tag: "Point de vue",
         tagBg: "#eee8f4", tagColor: "#4a2a8c",
-        etape: "5 / 14", temps: "10 min", km: "1,1",
+        etape: "4 / 10", temps: "10 min", km: "1,1",
         images: [
             { src: null, alt: "Vue sur la cascade de Sillans",   grad: "linear-gradient(160deg,#4a8ccc,#2a4c8c)" },
             { src: null, alt: "La fontaine pétrifiante",         grad: "linear-gradient(160deg,#6aadd4,#3a6cac)" },
@@ -85,11 +69,11 @@ const POIS = [
         tip: { title: "Attention", color: "#4a2a8c", bg: "#eee8f4", text: "La falaise est fragile et potentiellement instable. Restez impérativement sur les zones balisées et ne vous approchez pas du bord. Les écogardes veillent à la sécurité de tous." }
     },
     {
-        id: 6,
-        title: "Avant la passerelle",
+        id: 5,
+        title: "La passerelle",
         tag: "Point d'observation",
         tagBg: "#e8eef4", tagColor: "#2a4a6b",
-        etape: "6 / 14", temps: "5 min", km: "1,3",
+        etape: "5 / 10", temps: "5 min", km: "1,3",
         images: [
             { src: null, alt: "Zone d'attente avant la passerelle", grad: "linear-gradient(160deg,#5a9cad,#2a6c7c)" },
             { src: null, alt: "La ripisylve au bord de l'eau",      grad: "linear-gradient(160deg,#4a8c9c,#1a5c6c)" },
@@ -101,11 +85,11 @@ const POIS = [
         tip: { title: "Éco-geste", color: "#2a4a6b", bg: "#e8eef4", text: "Ne jetez aucun déchet dans ou près de la rivière. Même un mégot ou un emballage peut perturber durablement cet écosystème sensible." }
     },
     {
-        id: 7,
-        title: "Belvédère et zone d'attente",
+        id: 6,
+        title: "Le belvédère",
         tag: "Biodiversité",
         tagBg: "#e8f4ee", tagColor: "#1a5c3a",
-        etape: "7 / 14", temps: "10 min", km: "1,5",
+        etape: "6 / 10", temps: "10 min", km: "1,5",
         images: [
             { src: null, alt: "Vue depuis le belvédère",         grad: "linear-gradient(160deg,#3a8c6e,#1a5c4e)" },
             { src: null, alt: "Les falaises et la cascade",      grad: "linear-gradient(160deg,#4a9c7e,#2a6c5a)" },
@@ -118,27 +102,11 @@ const POIS = [
         tip: { title: "Le saviez-vous ?", color: "#1a5c3a", bg: "#e8f4ee", text: "Si vous visitez le sentier en soirée entre mai et octobre, observez le ciel au-dessus de la cascade : les vols erratiques et rapides que vous verrez sont ceux des chauves-souris en chasse." }
     },
     {
-        id: 8,
-        title: "L'usine hydroélectrique",
-        tag: "Patrimoine industriel",
-        tagBg: "#e8ecf4", tagColor: "#2a3a6b",
-        etape: "8 / 14", temps: "5 min", km: "1,8",
-        images: [
-            { src: null, alt: "Ancienne usine hydroélectrique",  grad: "linear-gradient(160deg,#5a6c9c,#2a3c6c)" },
-            { src: null, alt: "La conduite forcée",              grad: "linear-gradient(160deg,#6a7cac,#3a4c7c)" },
-        ],
-        description: [
-            "Cette ancienne usine hydroélectrique fut l'une des premières installations du genre dans le Var. Elle exploitait la force de la Bresque pour produire de l'électricité, alimentant le village de Sillans dès le début du XXe siècle — bien avant que l'électrification rurale ne soit généralisée en France.",
-            "La conduite forcée, visible le long du talus, acheminait l'eau depuis un point de captage en amont jusqu'aux turbines de l'usine. Aujourd'hui hors d'usage, ces vestiges industriels témoignent de l'ingéniosité avec laquelle les habitants tirèrent parti de leur ressource naturelle principale.",
-        ],
-        tip: { title: "Histoire locale", color: "#2a3a6b", bg: "#e8ecf4", text: "L'électricité produite ici permit d'éclairer l'église, la mairie et quelques commerces du village dès 1910, une modernité remarquable pour une commune rurale de cette taille à l'époque." }
-    },
-    {
-        id: 9,
+        id: 7,
         title: "La Bresque",
         tag: "Écosystème aquatique",
         tagBg: "#e0f3f9", tagColor: "#03658C",
-        etape: "9 / 14", temps: "5 min", km: "2,2",
+        etape: "7 / 10", temps: "5 min", km: "2,2",
         images: [
             { src: null, alt: "La Bresque et ses berges",        grad: "linear-gradient(160deg,#2a9cad,#1a6c7c)" },
             { src: null, alt: "Faune aquatique de la Bresque",   grad: "linear-gradient(160deg,#3aacbd,#2a7c8c)" },
@@ -151,11 +119,11 @@ const POIS = [
         tip: { title: "Indicateur environnemental", color: "#03658C", bg: "#e0f3f9", text: "La présence d'écrevisses à pattes blanches est un excellent indicateur de la qualité de l'eau. Cette espèce ne tolère pas la pollution — la trouver ici confirme l'état sanitaire remarquable de la Bresque." }
     },
     {
-        id: 10,
-        title: "L'ancienne gare Aups-Sillans",
+        id: 8,
+        title: "L'ancienne gare d'Aups-Sillans",
         tag: "Patrimoine historique",
         tagBg: "#f4ede8", tagColor: "#6b3a1a",
-        etape: "10 / 14", temps: "5 min", km: "2,6",
+        etape: "8 / 10", temps: "5 min", km: "2,6",
         images: [
             { src: null, alt: "L'ancienne gare de Sillans",      grad: "linear-gradient(160deg,#cc7a5a,#8c4a2a)" },
             { src: null, alt: "Les anciens rails",               grad: "linear-gradient(160deg,#bc6a4a,#7c3a1a)" },
@@ -167,11 +135,11 @@ const POIS = [
         tip: { title: "Le saviez-vous ?", color: "#6b3a1a", bg: "#f4ede8", text: "La ligne Aups-Sillans transportait non seulement des voyageurs mais aussi du bois de chêne-liège, de la lavande séchée et des produits agricoles vers les marchés de la région." }
     },
     {
-        id: 11,
+        id: 9,
         title: "Le lavoir communal",
         tag: "Patrimoine local",
         tagBg: "#f4f0e8", tagColor: "#5a4a1a",
-        etape: "11 / 14", temps: "5 min", km: "2,9",
+        etape: "9 / 10", temps: "5 min", km: "2,9",
         images: [
             { src: null, alt: "Le lavoir de Sillans",            grad: "linear-gradient(160deg,#adbc7a,#7c8c4a)" },
             { src: null, alt: "Les bacs en pierre",              grad: "linear-gradient(160deg,#9cac6a,#6c7c3a)" },
@@ -183,27 +151,11 @@ const POIS = [
         tip: { title: "Vie d'autrefois", color: "#5a4a1a", bg: "#f4f0e8", text: "Les femmes utilisaient du savon de Marseille, un battoir en bois et leurs mains nues dans l'eau froide, parfois pendant des heures. Le lavoir était aussi un espace de liberté et d'échanges, hors du regard des hommes." }
     },
     {
-        id: 12,
-        title: "Les remparts",
-        tag: "Patrimoine fortifié",
-        tagBg: "#eceef2", tagColor: "#2a3a5a",
-        etape: "12 / 14", temps: "5 min", km: "3,1",
-        images: [
-            { src: null, alt: "Les remparts de Sillans",         grad: "linear-gradient(160deg,#6a7a8c,#3a4a5c)" },
-            { src: null, alt: "Vestiges des fortifications",     grad: "linear-gradient(160deg,#7a8a9c,#4a5a6c)" },
-        ],
-        description: [
-            "Les vestiges des remparts de Sillans datent du Moyen Âge. Ce système défensif entourait le village perché pour le protéger des attaques, notamment durant les guerres de Religion qui ravagèrent le Var aux XVIe et XVIIe siècles. Seules quelques sections de murs et une tour ont survécu aux siècles.",
-            "Le tracé des anciens remparts est encore lisible dans le plan actuel du village : les rues qui le bordaient ont conservé leur courbe, et certaines maisons sont construites à même les pierres de l'enceinte. La rue des Remparts rappelle dans son nom ce passé défensif.",
-        ],
-        tip: { title: "Architecture médiévale", color: "#2a3a5a", bg: "#eceef2", text: "Les pierres des remparts ont souvent été réemployées pour construire des maisons au fil des siècles. Regardez les murs des habitations voisines : vous y trouverez parfois de grands blocs très anciens, récupérés des fortifications." }
-    },
-    {
-        id: 13,
-        title: "La mairie — ancien château",
+        id: 10,
+        title: "La mairie",
         tag: "Patrimoine architectural",
         tagBg: "#f4eee8", tagColor: "#6b4a1a",
-        etape: "13 / 14", temps: "5 min", km: "3,3",
+        etape: "10 / 10", temps: "5 min", km: "3,3",
         images: [
             { src: null, alt: "La mairie de Sillans",            grad: "linear-gradient(160deg,#cc9a6a,#8c6a3a)" },
             { src: null, alt: "Façade de l'ancien château",      grad: "linear-gradient(160deg,#bc8a5a,#7c5a2a)" },
@@ -212,24 +164,7 @@ const POIS = [
             "L'actuelle mairie occupe les murs de l'ancien château seigneurial de Sillans. Édifié au Moyen Âge pour les seigneurs locaux, le bâtiment fut progressivement transformé après la Révolution française lorsque la commune en prit possession pour en faire le siège de son administration.",
             "La façade conserve des éléments architecturaux d'époque : encadrements de fenêtres, linteaux en pierre de taille et la sobre élégance des constructions provençales d'Ancien Régime. C'est ici que se prennent les décisions de la vie communale depuis plus de deux siècles.",
         ],
-        tip: { title: "Révolution française", color: "#6b4a1a", bg: "#f4eee8", text: "Après 1789, les châteaux et biens des nobles furent confisqués comme \"biens nationaux\" et souvent attribués aux communes. C'est ainsi que Sillans récupéra son château pour en faire sa mairie." }
-    },
-    {
-        id: 14,
-        title: "La Grande Rue",
-        tag: "Centre historique",
-        tagBg: "#f4e8ee", tagColor: "#6b1a4a",
-        etape: "14 / 14", temps: "5 min", km: "3,5",
-        images: [
-            { src: null, alt: "La grande rue de Sillans",        grad: "linear-gradient(160deg,#cc6a9a,#8c3a6a)" },
-            { src: null, alt: "La fontaine du village",          grad: "linear-gradient(160deg,#bc5a8a,#7c2a5a)" },
-            { src: null, alt: "Croisement place principale",     grad: "linear-gradient(160deg,#dc7aaa,#9c4a7a)" },
-        ],
-        description: [
-            "La Grande Rue est l'artère principale de Sillans-la-Cascade. Elle relie la place de l'église à la place de l'Abreuvoir, jalonnée de maisons en pierre aux volets colorés, de fontaines et de passages ombragés typiques de l'architecture villageoise provençale.",
-            "C'est ici que bat le cœur social du village : les commerces, le café, le marché hebdomadaire. La fontaine de l'Abreuvoir servait autrefois à abreuver les animaux de trait. Aujourd'hui, elle est le symbole de la place publique méditerranéenne — un lieu de fraîcheur et de rencontre.",
-        ],
-        tip: { title: "Fin du parcours", color: "#6b1a4a", bg: "#f4e8ee", text: "Vous avez parcouru environ 3,5 km et découvert 14 points remarquables. Prenez le temps d'une dernière pause à la terrasse du café avant de rejoindre votre point de départ — l'église est à quelques minutes à pied." }
+        tip: { title: "Fin du parcours", color: "#6b4a1a", bg: "#f4eee8", text: "Vous avez parcouru environ 3,3 km et découvert les 10 points remarquables du sentier. Prenez le temps d'une dernière pause avant de rejoindre votre point de départ — l'église est à quelques minutes à pied." }
     },
 ];
 
