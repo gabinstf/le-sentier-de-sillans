@@ -32,6 +32,23 @@
     const el = document.createElement('div');
     el.className = 'poi';
     el.textContent = i + 1;
+
+    let tapX, tapY;
+    el.addEventListener('touchstart', e => {
+      e.stopPropagation();
+      tapX = e.touches[0].clientX;
+      tapY = e.touches[0].clientY;
+    }, { passive: true });
+    el.addEventListener('touchend', e => {
+      e.stopPropagation();
+      const dx = Math.abs(e.changedTouches[0].clientX - tapX);
+      const dy = Math.abs(e.changedTouches[0].clientY - tapY);
+      if (dx < 10 && dy < 10) window.location.href = 'interet.html?id=' + (i + 1);
+    }, { passive: true });
+    el.addEventListener('click', () => {
+      window.location.href = 'interet.html?id=' + (i + 1);
+    });
+
     poisLayer.appendChild(el);
     return el;
   });

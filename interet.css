@@ -1,5 +1,13 @@
+body {
+    height: auto;
+    min-height: 100dvh;
+    overflow: auto;
+}
+
 .main-content {
-    padding: 0;
+    display: block;
+    overflow: visible;
+    padding: 0 0 80px;
 }
 
 /* ── BOUTON RETOUR ── */

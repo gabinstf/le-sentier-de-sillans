@@ -155,6 +155,8 @@ p {
     font-weight: 700;
     font-size: 13px;
     color: white;
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 /* ── FOOTER ── */
