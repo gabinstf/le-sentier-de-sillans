@@ -68,19 +68,10 @@ p {
     gap: 10px;
 }
 
-.logo-icon {
-    width: 36px;
-    height: 36px;
+.logo-img {
+    height: 38px;
+    width: auto;
     flex-shrink: 0;
-}
-
-.logo-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    line-height: 1.3;
-    text-transform: none;
-    letter-spacing: 0.01em;
 }
 
 .header-weather {
