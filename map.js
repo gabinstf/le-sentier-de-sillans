@@ -43,10 +43,10 @@
       e.stopPropagation();
       const dx = Math.abs(e.changedTouches[0].clientX - tapX);
       const dy = Math.abs(e.changedTouches[0].clientY - tapY);
-      if (dx < 10 && dy < 10) window.location.href = 'interet.html?id=' + (i + 1);
+      if (dx < 10 && dy < 10) window.goTo('interet.html?id=' + (i + 1));
     }, { passive: true });
     el.addEventListener('click', () => {
-      window.location.href = 'interet.html?id=' + (i + 1);
+      window.goTo('interet.html?id=' + (i + 1));
     });
 
     poisLayer.appendChild(el);

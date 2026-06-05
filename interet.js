@@ -263,7 +263,7 @@ function buildNav(id) {
 function navigateTo(id) {
     const url = new URL(window.location.href);
     url.searchParams.set('id', id);
-    window.location.href = url.toString();
+    window.goTo(url.toString());
 }
 
 // ── CONTENU ───────────────────────────────────────────────────────────────────
