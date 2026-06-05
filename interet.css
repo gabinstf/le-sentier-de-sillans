@@ -2,17 +2,11 @@ body {
     height: auto;
     min-height: 100dvh;
     overflow: auto;
-    animation: pageFadeIn 0.28s ease both;
-}
-
-@keyframes pageFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
 }
 
 @keyframes sectionIn {
-    from { opacity: 0; transform: translateY(32px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { transform: translateY(32px); }
+    to   { transform: translateY(0); }
 }
 
 .main-content {
