@@ -25,7 +25,9 @@ body {
     background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     max-width: 430px;
     margin: 0 auto;
 }
@@ -103,26 +105,56 @@ p {
 
 .main-content {
     flex: 1;
-    padding: 24px 20px;
+    overflow: hidden;
+    display: flex;
+    min-height: 0;
 }
 
-.hero {
-    text-align: center;
-    padding: 60px 20px;
+/* ── MAP ── */
+
+.map-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+    background-color: #c8dfc8;
 }
 
-.hero h2 {
-    font-family: 'Marky', sans-serif;
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    color: #03658C;
+.map-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+    user-select: none;
+    -webkit-user-drag: none;
+    display: block;
+    pointer-events: none;
 }
 
-.hero p {
+.pois-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.poi {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #03658C;
+    border-radius: 50%;
+    border: 2.5px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
     font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #555;
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
 }
 
 /* ── FOOTER ── */
