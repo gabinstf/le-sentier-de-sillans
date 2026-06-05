@@ -63,7 +63,7 @@ const POIS = [
             { src: null, alt: "Vue plongeante sur le bassin",    grad: "linear-gradient(160deg,#2a6cad,#1a3c7c)" },
         ],
         description: [
-            "Ce belvédère offre le premier et le plus spectaculaire regard sur la cascade de Sillans, qui plonge de <strong>42 mètres</strong> dans un bassin naturel aux reflets turquoise. La hauteur de la chute et le décor minéral qui l'encadre en font l'une des plus belles cascades du Var.",
+            "Ce point de vue offre le premier et le plus spectaculaire regard sur la cascade de Sillans, qui plonge de <strong>42 mètres</strong> dans un bassin naturel aux reflets turquoise. La hauteur de la chute et le décor minéral qui l'encadre en font l'une des plus belles cascades du Var.",
             "L'eau qui tombe ici s'appelle une fontaine pétrifiante : chargée en calcaire, elle dépose au fil du temps une fine couche minérale sur tout ce qu'elle touche — rochers, branches, mousses. La falaise elle-même est sculptée par ce phénomène continu depuis des millénaires.",
         ],
         tip: { title: "Attention", color: "#4a2a8c", bg: "#eee8f4", text: "La falaise est fragile et potentiellement instable. Restez impérativement sur les zones balisées et ne vous approchez pas du bord. Les écogardes veillent à la sécurité de tous." }
