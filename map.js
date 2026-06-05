@@ -6,7 +6,7 @@
   let minScale = 1;
   let tx = 0;
   let ty = 0;
-  const MAX_SCALE = 5;
+  let maxScale = 1;
 
   // Coordonnées des étapes dans l'image originale (4167×4167 px)
   // Numérotation : 1 = point le plus au sud du centre-ville, vers la nature
@@ -65,6 +65,7 @@
     const ch = container.clientHeight;
     const cw = container.clientWidth;
     minScale = ch / img.naturalHeight;
+    maxScale = minScale * 3;
     scale = minScale;
     tx = (cw - img.naturalWidth * scale) / 2;
     ty = 0;
@@ -81,6 +82,7 @@
     const newMin = container.clientHeight / img.naturalHeight;
     if (scale <= minScale) scale = newMin;
     minScale = newMin;
+    maxScale = newMin * 1.5;
     clampBounds();
     render();
   });
@@ -120,7 +122,7 @@
     if (e.touches.length >= 2) {
       const nd = touchDist(e.touches[0], e.touches[1]);
       const { x: mx, y: my } = touchMid(e.touches[0], e.touches[1]);
-      const ns = clamp(scale * nd / prevDist, minScale, MAX_SCALE);
+      const ns = clamp(scale * nd / prevDist, minScale, maxScale);
       const sr = ns / scale;
       tx = mx - (prevMx - tx) * sr;
       ty = my - (prevMy - ty) * sr;
@@ -171,7 +173,7 @@
     e.preventDefault();
     const r = container.getBoundingClientRect();
     const mx = e.clientX - r.left, my = e.clientY - r.top;
-    const ns = clamp(scale * (e.deltaY < 0 ? 1.1 : 0.9), minScale, MAX_SCALE);
+    const ns = clamp(scale * (e.deltaY < 0 ? 1.1 : 0.9), minScale, maxScale);
     const sr = ns / scale;
     tx = mx - (mx - tx) * sr;
     ty = my - (my - ty) * sr;
