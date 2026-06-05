@@ -208,3 +208,80 @@ p {
     width: 26px;
     height: 26px;
 }
+
+/* ── STATS ── */
+
+.stats-main {
+    position: relative;
+    flex-direction: column;
+}
+
+.stats-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('images/HANOT_CLEMENT_rive_gauche_gopro_photo_cascade_deux.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #2c3a18;
+}
+
+.stats-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.42);
+}
+
+.stats-body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 24px 20px 16px;
+    min-height: 0;
+}
+
+.stats-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.stats-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat-number {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-size: 3.8rem;
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.92;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.footer-btn--active {
+    background-color: rgba(3, 101, 140, 0.14);
+    border-radius: 10px;
+}

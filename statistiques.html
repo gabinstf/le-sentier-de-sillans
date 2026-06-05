@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Le Sentier de Sillans</title>
+    <title>Le Sentier de Sillans — Statistiques</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="map.css">
 </head>
@@ -25,9 +25,24 @@
         </div>
     </header>
 
-    <main class="main-content">
-        <div class="map-container" id="mapContainer">
-            <img src="images/carte.png" alt="Carte du sentier de Sillans" class="map-image" id="mapImage" draggable="false">
+    <main class="main-content stats-main">
+        <div class="stats-bg"></div>
+        <div class="stats-body">
+            <h2 class="stats-title">Statistique du Parcours</h2>
+            <div class="stats-list">
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-distance">0</span>
+                    <span class="stat-label">Mètres parcourus</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-especes">0</span>
+                    <span class="stat-label">Espèces rencontrées</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-fleurs">0</span>
+                    <span class="stat-label">Fleurs rencontrées</span>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -41,7 +56,7 @@
         </button>
 
         <div class="footer-center">
-            <button class="footer-map-btn" aria-label="Carte">
+            <button class="footer-map-btn" aria-label="Carte" onclick="goTo('index.html')">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/>
                     <circle cx="12" cy="9" r="2.5" fill="#1a6b8a"/>
@@ -49,17 +64,18 @@
             </button>
         </div>
 
-        <button class="footer-btn" aria-label="Statistiques" onclick="goTo('statistiques.html')">
+        <button class="footer-btn footer-btn--active" aria-label="Statistiques">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="13" width="3.5" height="7" rx="1" fill="#1a6b8a"/>
-                <rect x="10.25" y="8" width="3.5" height="12" rx="1" fill="#1a6b8a"/>
-                <rect x="16.5" y="4" width="3.5" height="16" rx="1" fill="#1a6b8a"/>
+                <rect x="4"    y="13" width="3.5" height="7"  rx="1" fill="#1a6b8a"/>
+                <rect x="10.25" y="8"  width="3.5" height="12" rx="1" fill="#1a6b8a"/>
+                <rect x="16.5" y="4"  width="3.5" height="16" rx="1" fill="#1a6b8a"/>
             </svg>
         </button>
     </footer>
 
     <script src="transitions.js"></script>
     <script src="weather.js"></script>
-    <script src="map.js"></script>
+    <script src="data.js"></script>
+    <script src="statistiques.js"></script>
 </body>
 </html>
