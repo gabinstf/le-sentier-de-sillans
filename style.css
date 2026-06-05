@@ -147,6 +147,13 @@ p {
     color: #03658C;
     pointer-events: auto;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.poi.active {
+    background-color: #03658C;
+    color: white;
+    box-shadow: 0 2px 12px rgba(3, 101, 140, 0.6);
 }
 
 /* ── FOOTER ── */

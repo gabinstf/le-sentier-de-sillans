@@ -301,6 +301,7 @@ function render() {
     const id     = parseInt(params.get('id')) || 1;
     const poi    = POIS.find(function(p) { return p.id === id; }) || POIS[0];
     currentPoi   = poi;
+    localStorage.setItem('lastPoiId', poi.id);
 
     document.title = poi.title + ' — Le Sentier de Sillans';
     buildGallery(poi);
