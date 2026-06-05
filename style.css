@@ -52,7 +52,7 @@ p {
 .header {
     background-color: #03658C;
     color: white;
-    padding: 14px 18px;
+    padding: 7px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -158,7 +158,7 @@ p {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 20px 20px;
+    padding: 6px 20px 10px;
     position: sticky;
     bottom: 0;
     z-index: 100;
@@ -168,30 +168,30 @@ p {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .footer-btn svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
 }
 
 .footer-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -30px;
+    margin-top: -22px;
 }
 
 .footer-map-btn {
-    width: 64px;
-    height: 64px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background-color: #03658C;
-    border: 4px solid #F2F2F2;
+    border: 3px solid #F2F2F2;
     box-shadow: 0 4px 12px rgba(26, 107, 138, 0.4);
     cursor: pointer;
     display: flex;
@@ -206,6 +206,6 @@ p {
 }
 
 .footer-map-btn svg {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
 }
