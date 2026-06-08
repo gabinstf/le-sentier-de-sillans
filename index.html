@@ -29,6 +29,21 @@
         <div class="map-container" id="mapContainer">
             <img src="images/carte.png" alt="Carte du sentier de Sillans" class="map-image" id="mapImage" draggable="false">
         </div>
+
+        <div class="poi-banner" id="poiBanner">
+            <div class="poi-banner-inner" id="poiBannerInner">
+                <h2 class="poi-banner-title" id="poiBannerTitle"></h2>
+                <div class="poi-banner-divider"></div>
+                <div class="poi-banner-body">
+                    <p class="poi-banner-desc" id="poiBannerDesc"></p>
+                    <div class="poi-banner-thumb" id="poiBannerThumb"></div>
+                </div>
+                <div class="poi-banner-actions">
+                    <button class="poi-banner-btn-primary" id="btnPoiSavoirPlus">En savoir plus</button>
+                    <button class="poi-banner-btn-secondary" id="btnPoiValider">VALIDER L'ÉTAPE</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
@@ -60,6 +75,7 @@
 
     <script src="transitions.js"></script>
     <script src="weather.js"></script>
+    <script src="data.js"></script>
     <script src="map.js"></script>
 </body>
 </html>
