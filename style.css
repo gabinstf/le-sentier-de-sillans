@@ -99,6 +99,7 @@ p {
     overflow: hidden;
     display: flex;
     min-height: 0;
+    position: relative;
 }
 
 /* ── MAP ── */
@@ -128,6 +129,7 @@ p {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    transform-origin: 0 0;
 }
 
 .poi {
@@ -141,12 +143,160 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translate(-50%, -50%);
     font-family: 'Marky', sans-serif;
     font-size: 19px;
     color: #03658C;
     pointer-events: auto;
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.poi.active {
+    background-color: #03658C;
+    color: white;
+    box-shadow: 0 2px 12px rgba(3, 101, 140, 0.6);
+}
+
+/* ── POI BANNER ── */
+
+@keyframes bannerSwipeFromRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+
+@keyframes bannerSwipeFromLeft {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+}
+
+.poi-banner {
+    position: absolute;
+    bottom: 30px;
+    left: 12px;
+    right: 12px;
+    background: #F2F2F2;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    z-index: 40;
+    overflow: hidden;
+    transform: translateY(120%);
+    transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.poi-banner.visible {
+    transform: translateY(0);
+}
+
+.poi-banner-inner {
+    padding: 14px 16px 16px;
+}
+
+.poi-banner-inner.from-right {
+    animation: bannerSwipeFromRight 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.poi-banner-inner.from-left {
+    animation: bannerSwipeFromLeft 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.poi-banner-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #03658C;
+    line-height: 1.25;
+    margin-bottom: 8px;
+}
+
+.poi-banner-divider {
+    border: none;
+    border-top: 1.5px dashed #48ADCC;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.poi-banner-body {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.poi-banner-desc {
+    flex: 1;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #444;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.poi-banner-thumb {
+    width: 88px;
+    height: 88px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: linear-gradient(160deg, #48ADCC, #03658C);
+}
+
+.poi-banner-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.poi-banner-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.poi-banner-btn-primary {
+    flex: 1;
+    background: #03658C;
+    color: white;
+    border: 2px solid #03658C;
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.poi-banner-btn-primary:active {
+    opacity: 0.8;
+}
+
+.poi-banner-btn-secondary {
+    flex: 1;
+    background: #48ADCC;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s, background 0.2s;
+}
+
+.poi-banner-btn-secondary.validated {
+    background: #2a9d7f;
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 0.8rem;
+}
+
+.poi-banner-btn-secondary:active {
+    opacity: 0.8;
 }
 
 /* ── FOOTER ── */
