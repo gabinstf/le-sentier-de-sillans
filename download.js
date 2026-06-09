@@ -18,15 +18,17 @@
         let tx, ty;
         el.addEventListener('touchstart', function (e) {
             e.stopPropagation();
+            e.preventDefault();
             tx = e.touches[0].clientX;
             ty = e.touches[0].clientY;
-        }, { passive: true });
+        }, { passive: false });
         el.addEventListener('touchend', function (e) {
             e.stopPropagation();
+            e.preventDefault();
             const dx = Math.abs(e.changedTouches[0].clientX - tx);
             const dy = Math.abs(e.changedTouches[0].clientY - ty);
             if (dx < 10 && dy < 10) fn(e);
-        }, { passive: true });
+        }, { passive: false });
         el.addEventListener('mousedown', function (e) { e.stopPropagation(); });
         el.addEventListener('click', fn);
     }
