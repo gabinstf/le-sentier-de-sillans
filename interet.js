@@ -2,6 +2,7 @@
 
 let currentPoi = null;
 let galleryIndex = 0;
+let autoTimer = null;
 
 const PHOTO_ICON = `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="4" y="12" width="56" height="40" rx="6" stroke="white" stroke-width="3"/>
@@ -28,7 +29,7 @@ function buildGallery(poi) {
 
         const dot = document.createElement('div');
         dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', function() { goToSlide(i); });
+        dot.addEventListener('click', function() { stopAuto(); goToSlide(i); });
         dots.appendChild(dot);
     });
 
@@ -41,39 +42,68 @@ function updateCounter(poi) {
 }
 
 function goToSlide(index) {
-    const track = document.getElementById('galleryTrack');
-    const dots  = document.getElementById('galleryDots').children;
-    galleryIndex = Math.max(0, Math.min(index, currentPoi.images.length - 1));
+    const wrapper = document.getElementById('galleryWrapper');
+    const track   = document.getElementById('galleryTrack');
+    const dots    = document.getElementById('galleryDots').children;
+    galleryIndex  = Math.max(0, Math.min(index, currentPoi.images.length - 1));
     track.style.transition = 'transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94)';
-    track.style.transform  = 'translateX(-' + galleryIndex * 100 + '%)';
+    track.style.transform  = 'translateX(' + (-galleryIndex * wrapper.offsetWidth) + 'px)';
     Array.from(dots).forEach(function(d, i) { d.classList.toggle('active', i === galleryIndex); });
     updateCounter(currentPoi);
 }
 
+function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+}
+
+function startAuto() {
+    stopAuto();
+    if (!currentPoi || currentPoi.images.length <= 1) return;
+    autoTimer = setInterval(function() {
+        goToSlide((galleryIndex + 1) % currentPoi.images.length);
+    }, 3000);
+}
+
 function initSwipe() {
-    const track = document.getElementById('galleryTrack');
-    let startX = 0, dragging = false, delta = 0;
+    const wrapper = document.getElementById('galleryWrapper');
+    const track   = document.getElementById('galleryTrack');
+    let startX = 0, startY = 0, axis = null, delta = 0;
 
-    track.addEventListener('touchstart', function(e) {
-        startX   = e.touches[0].clientX;
-        dragging = true;
-        delta    = 0;
+    wrapper.addEventListener('touchstart', function(e) {
+        if (e.touches.length !== 1) return;
+        stopAuto();
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        axis   = null;
+        delta  = 0;
         track.style.transition = 'none';
+        track.style.transform  = 'translateX(' + (-galleryIndex * wrapper.offsetWidth) + 'px)';
     }, { passive: true });
 
-    track.addEventListener('touchmove', function(e) {
-        if (!dragging) return;
-        delta = e.touches[0].clientX - startX;
-        const pct = -galleryIndex * 100 + (delta / track.parentElement.offsetWidth) * 100;
-        track.style.transform = 'translateX(' + pct + '%)';
+    wrapper.addEventListener('touchmove', function(e) {
+        if (e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        if (axis === null) {
+            if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+            axis = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
+        }
+        if (axis !== 'h') return;
+        delta = dx;
+        track.style.transform = 'translateX(' + (-galleryIndex * wrapper.offsetWidth + dx) + 'px)';
     }, { passive: true });
 
-    track.addEventListener('touchend', function() {
-        dragging = false;
-        if (delta < -50)      goToSlide(galleryIndex + 1);
-        else if (delta > 50)  goToSlide(galleryIndex - 1);
-        else                  goToSlide(galleryIndex);
-    });
+    function onEnd() {
+        if (axis === 'h') {
+            if (delta < -50)      goToSlide(galleryIndex + 1);
+            else if (delta > 50)  goToSlide(galleryIndex - 1);
+            else                  goToSlide(galleryIndex);
+        }
+        startAuto();
+    }
+
+    wrapper.addEventListener('touchend',    onEnd, { passive: true });
+    wrapper.addEventListener('touchcancel', onEnd, { passive: true });
 }
 
 // ── CONTENU ───────────────────────────────────────────────────────────────────
@@ -117,6 +147,7 @@ function render() {
     buildGallery(poi);
     buildContent(poi);
     initSwipe();
+    startAuto();
 }
 
 render();
