@@ -13,6 +13,11 @@
     let downloading    = false;
     let autoCloseTimer = null;
 
+    // Masquer définitivement si les données sont déjà téléchargées
+    if (localStorage.getItem('dlDone')) {
+        dlWidget.classList.add('dl-hidden');
+    }
+
     // ── Tap handler touch + mouse ─────────────────────────────────────────
     function addTapHandler(el, fn) {
         let tx, ty;
