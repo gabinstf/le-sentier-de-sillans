@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script>var _DLV='2';if(localStorage.getItem('dlVersion')!==_DLV){localStorage.removeItem('dlDone');}if(!localStorage.getItem('dlDone')&&!sessionStorage.getItem('acPassed')){location.replace('accueil.html');}</script>
+    <title>À propos — Le Sentier de Sillans</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="info-pages.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-logo">
+            <img src="images/logo.svg" alt="Le sentier de Sillans" class="logo-img">
+        </div>
+        <div class="header-weather">
+            <svg id="weatherIcon" class="weather-icon" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="14" r="9" fill="white" opacity="0.9"/>
+                <path d="M30 5 L30 2M30 23 L30 26M39 14 L42 14M21 14 L18 14M36.4 8.6 L38.5 6.5M23.6 19.4 L21.5 21.5M36.4 19.4 L38.5 21.5M23.6 8.6 L21.5 6.5" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <rect x="6" y="20" width="28" height="14" rx="7" fill="white"/>
+                <rect x="12" y="14" width="16" height="12" rx="6" fill="white"/>
+            </svg>
+            <span id="weatherText" class="weather-text">–</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+
+        <!-- Héro -->
+        <div class="iap-hero">
+            <button class="ip-back" onclick="window.goTo('info.html')">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <img src="images/logo.svg" alt="Le Sentier de Sillans" class="iap-hero-logo">
+            <h1 class="iap-hero-title">Le Sentier<br>de Sillans</h1>
+            <p class="iap-hero-tagline">Application web pédagogique<br>pour découvrir la cascade et son sentier.</p>
+        </div>
+
+        <!-- Section 1 : L'application -->
+        <div class="iap-section">
+            <span class="iap-section-tag">L'application</span>
+            <h2 class="iap-section-title">Une expérience de terrain</h2>
+            <p class="iap-text">Cette web app accompagne votre visite du sentier de la cascade de Sillans-la-Cascade. Elle vous guide à travers 10 points remarquables — patrimoine, géologie, biodiversité, histoire — et fonctionne entièrement hors connexion une fois les données téléchargées.</p>
+        </div>
+
+        <!-- Section 2 : Vos données -->
+        <div class="iap-section">
+            <span class="iap-section-tag">Confidentialité</span>
+            <h2 class="iap-section-title">Vos données vous appartiennent</h2>
+            <p class="iap-text">Aucune donnée personnelle n'est collectée ni transmise.</p>
+            <div class="iap-check-list">
+                <div class="iap-check">
+                    <div class="iap-check-dot">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="iap-check-text"><span>Stockage 100 % local</span> — vos étapes validées et les données en cache restent sur votre appareil.</p>
+                </div>
+                <div class="iap-check">
+                    <div class="iap-check-dot">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="iap-check-text"><span>Aucun serveur tiers</span> — l'application ne communique avec aucun service distant, pas de cookies de suivi.</p>
+                </div>
+                <div class="iap-check">
+                    <div class="iap-check-dot">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="iap-check-text"><span>Effaçable à tout moment</span> — videz le cache de votre navigateur pour supprimer toutes les données locales.</p>
+                </div>
+                <div class="iap-check">
+                    <div class="iap-check-dot">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="iap-check-text"><span>Sans compte requis</span> — aucune inscription, aucun identifiant.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3 : Technologie -->
+        <div class="iap-section">
+            <span class="iap-section-tag">Technologie</span>
+            <h2 class="iap-section-title">Comment ça fonctionne</h2>
+            <p class="iap-text">L'application utilise les <strong>Service Workers</strong> et le <strong>Cache API</strong> du navigateur pour stocker les ressources en local lors du premier téléchargement. Une fois en cache, toutes les pages et images sont disponibles sans connexion, idéal sur le sentier où la couverture réseau est limitée.</p>
+        </div>
+
+        <!-- Crédits -->
+        <div class="iap-credits">
+            <p class="iap-credits-line"><strong>Réalisé dans le cadre d'un projet universitaire</strong></p>
+            <p class="iap-credits-line">Département du Var · Sillans-la-Cascade</p>
+            <p class="iap-credits-line" style="margin-top:6px;">Images : terrain & archives locales</p>
+            <p class="iap-credits-line">Données météo : Open-Meteo (open source)</p>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <button class="footer-btn footer-btn--active" aria-label="Informations" onclick="window.goTo('info.html')">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#03658C" stroke-width="2"/>
+                <path d="M12 11 L12 17" stroke="#03658C" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="12" cy="7.5" r="1.2" fill="#03658C"/>
+            </svg>
+        </button>
+        <div class="footer-center">
+            <button class="footer-map-btn" aria-label="Carte" onclick="window.goTo('index.html')">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/>
+                    <circle cx="12" cy="9" r="2.5" fill="#1a6b8a"/>
+                </svg>
+            </button>
+        </div>
+        <button class="footer-btn" aria-label="Statistiques" onclick="window.goTo('stats.html')">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="13" width="3.5" height="7" rx="1" fill="#1a6b8a"/>
+                <rect x="10.25" y="8" width="3.5" height="12" rx="1" fill="#1a6b8a"/>
+                <rect x="16.5" y="4" width="3.5" height="16" rx="1" fill="#1a6b8a"/>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="transitions.js"></script>
+    <script src="weather.js"></script>
+
+</body>
+</html>
