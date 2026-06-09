@@ -45,14 +45,14 @@
   });
 
   // Dark blue (index 2) → light blue (1) → off-white (0)
-  var delays = [920, 740, 560];
+  var delays = [600, 440, 260];
   layers.forEach(function (el, i) {
     setTimeout(function () { el.classList.add('up'); }, delays[i]);
   });
 
   // Fade out logo avant la dernière couche
-  setTimeout(function () { logo.style.opacity = '0'; }, 840);
+  setTimeout(function () { logo.style.opacity = '0'; }, 480);
 
   // Suppression
-  setTimeout(function () { splash.remove(); }, 1550);
+  setTimeout(function () { splash.remove(); }, 1200);
 })();
