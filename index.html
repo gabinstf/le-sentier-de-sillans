@@ -26,6 +26,7 @@
     </header>
 
     <main class="main-content">
+        <div class="poi-notif" id="poiNotif"></div>
         <div class="map-container" id="mapContainer">
             <img src="images/carte.png" alt="Carte du sentier de Sillans" class="map-image" id="mapImage" draggable="false">
         </div>
@@ -72,6 +73,17 @@
             </svg>
         </button>
     </footer>
+
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-modal">
+            <p class="confirm-question">Souhaitez-vous vraiment annuler la validation de cette étape&nbsp;?</p>
+            <p class="confirm-warning">Annuler la validation d'une étape entraînera également l'annulation de toutes les étapes suivantes.</p>
+            <div class="confirm-actions">
+                <button class="confirm-btn-cancel" id="confirmCancel">Annuler</button>
+                <button class="confirm-btn-confirm" id="confirmOk">Confirmer</button>
+            </div>
+        </div>
+    </div>
 
     <script src="transitions.js"></script>
     <script src="weather.js"></script>
