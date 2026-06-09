@@ -53,11 +53,41 @@
     const isValidated = validated.includes(id);
     btnVal.textContent = isValidated ? 'Étape validée ✓' : "VALIDER L'ÉTAPE";
     btnVal.classList.toggle('validated', isValidated);
-    btnVal.onclick = isValidated ? null : function () {
+    btnVal.onclick = isValidated ? function () {
+      showConfirmModal(id);
+    } : function () {
       const v = JSON.parse(localStorage.getItem('validatedPois') || '[]');
       if (!v.includes(id)) { v.push(id); localStorage.setItem('validatedPois', JSON.stringify(v)); }
       fillBannerContent(id);
+      updatePoiStates();
+      showNotif(id);
     };
+  }
+
+  function showConfirmModal(id) {
+    const overlay = document.getElementById('confirmOverlay');
+    overlay.classList.add('visible');
+
+    document.getElementById('confirmOk').onclick = function () {
+      let v = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+      v = v.filter(function (pid) { return pid < id; });
+      localStorage.setItem('validatedPois', JSON.stringify(v));
+      overlay.classList.remove('visible');
+      fillBannerContent(id);
+      updatePoiStates();
+    };
+
+    document.getElementById('confirmCancel').onclick = function () {
+      overlay.classList.remove('visible');
+    };
+  }
+
+  function showNotif(id) {
+    const notif = document.getElementById('poiNotif');
+    notif.textContent = 'Étape validée ' + id + '/10 ✓';
+    notif.classList.add('visible');
+    clearTimeout(notif._t);
+    notif._t = setTimeout(function () { notif.classList.remove('visible'); }, 2800);
   }
 
   function showBanner(id) {
@@ -156,6 +186,19 @@
     poiEls.forEach(function (el, i) { el.classList.toggle('active', i + 1 === id); });
   }
 
+  function updatePoiStates() {
+    const validated = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+    let nextId = null;
+    for (var n = 1; n <= MAP_COORDS.length; n++) {
+      if (!validated.includes(n)) { nextId = n; break; }
+    }
+    poiEls.forEach(function (el, i) {
+      const id = i + 1;
+      el.classList.toggle('validated', validated.includes(id));
+      el.classList.toggle('next', id === nextId);
+    });
+  }
+
   // ── Création des marqueurs ────────────────────────────────────────────────
 
   let touchHandled = false;
@@ -163,7 +206,7 @@
   const poiEls = MAP_COORDS.map(function (c, i) {
     const el = document.createElement('div');
     el.className = 'poi';
-    el.textContent = i + 1;
+    el.innerHTML = '<span class="poi-label">' + (i + 1) + '</span>';
     el.style.left = c.x + 'px';
     el.style.top  = c.y + 'px';
 
@@ -200,6 +243,39 @@
 
   const savedPoiId = parseInt(localStorage.getItem('lastPoiId')) || 1;
   setActivePoi(savedPoiId);
+  updatePoiStates();
+
+  // ── Swipe entre POIs (bandeau + carte) ───────────────────────────────────
+
+  function navigatePoi(direction) {
+    if (currentBannerPoiId === null) return;
+    const newId = currentBannerPoiId + direction;
+    if (newId < 1 || newId > MAP_COORDS.length) return;
+    setActivePoi(newId);
+    centerOnPoi(newId - 1);
+    showBanner(newId);
+  }
+
+  (function () {
+    var targets = [
+      document.getElementById('poiBanner'),
+      container,
+    ];
+    targets.forEach(function (el) {
+      var sx = 0, sy = 0;
+      el.addEventListener('touchstart', function (e) {
+        sx = e.touches[0].clientX;
+        sy = e.touches[0].clientY;
+      }, { passive: true });
+      el.addEventListener('touchend', function (e) {
+        if (currentBannerPoiId === null) return;
+        var dx = e.changedTouches[0].clientX - sx;
+        var dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+        navigatePoi(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    });
+  }());
 
   // ── Init carte ────────────────────────────────────────────────────────────
 

@@ -151,10 +151,67 @@ p {
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-.poi.active {
+.poi.active,
+.poi.validated {
     background-color: #03658C;
     color: white;
-    box-shadow: 0 2px 12px rgba(3, 101, 140, 0.6);
+    box-shadow: 0 2px 12px rgba(3, 101, 140, 0.5);
+}
+
+@keyframes poiNextGlow {
+    0%   { box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0px rgba(72, 173, 204, 0.65); }
+    70%  { box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 10px rgba(72, 173, 204, 0); }
+    100% { box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0px rgba(72, 173, 204, 0.65); }
+}
+
+.poi.next {
+    transition: background-color 0.2s, color 0.2s;
+    animation: poiNextGlow 1.8s ease-out infinite;
+}
+
+.poi.next::before {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 3px solid white;
+    pointer-events: none;
+    animation: poiRingBounce 1.0s ease-in-out infinite;
+}
+
+@keyframes poiRingBounce {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.28); }
+}
+
+.poi-label {
+    display: block;
+}
+
+/* ── POI NOTIFICATION ── */
+
+.poi-notif {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-160%);
+    white-space: nowrap;
+    background: white;
+    color: #2a9d7f;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-align: center;
+    z-index: 50;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.poi-notif.visible {
+    transform: translateX(-50%) translateY(0);
 }
 
 /* ── POI BANNER ── */
@@ -297,6 +354,98 @@ p {
 
 .poi-banner-btn-secondary:active {
     opacity: 0.8;
+}
+
+/* ── CONFIRMATION MODAL ── */
+
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.confirm-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.confirm-modal {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px 20px;
+    margin: 0 24px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+    transition: transform 0.2s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.confirm-overlay.visible .confirm-modal {
+    transform: scale(1);
+}
+
+.confirm-question {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: #03658C;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.confirm-warning {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    font-size: 0.72rem;
+    color: #999;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.confirm-btn-cancel {
+    flex: 1;
+    background: #03658C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.confirm-btn-confirm {
+    flex: 1;
+    background: white;
+    color: #03658C;
+    border: 2px solid #03658C;
+    border-radius: 8px;
+    padding: 11px 8px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.confirm-btn-cancel:active,
+.confirm-btn-confirm:active {
+    opacity: 0.75;
 }
 
 /* ── FOOTER ── */
