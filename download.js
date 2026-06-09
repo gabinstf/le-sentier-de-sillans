@@ -10,6 +10,28 @@
     const prohibBtn1      = document.getElementById('prohibBtn1');
     const prohibBtn2      = document.getElementById('prohibBtn2');
 
+    const CACHE_NAME = 'sentier-sillans-v2';
+
+    const ASSETS = [
+        'index.html', 'interet.html', 'accueil.html',
+        'style.css', 'map.css', 'interet.css', 'accueil.css',
+        'transitions.js', 'weather.js', 'map.js', 'interet.js',
+        'accueil.js', 'download.js', 'splash.js', 'data.js', 'sw.js',
+        'fonts/Outfit-VariableFont_wght.ttf', 'fonts/marky.otf', 'fonts/marky.ttf',
+        'images/logo.svg', 'images/carte.png', 'images/photo_cascade.png',
+        'images/RUE%20SILLANS%20LA%20CASCADE.png',
+        'images/Sillans_la_Cascade_%C3%A9glise.jpeg',
+        'images/baignade%20interdite.png', 'images/baignade%20riviere.jpg',
+        'images/belvedere%20sillans%20la%20cascade.png',
+        'images/cascade%20de%20sillans.png', 'images/cigarette%20interdiction.png',
+        'images/fond%20cascade%20accueil%20donn%C3%A9es.png',
+        'images/gare%20sillans%20%C3%A9cole.webp',
+        'images/lavoir%20sillans%20la%20cascade.webp',
+        'images/logo%20dpt%20du%20var%20blanc.png', 'images/mur%20de%20tuff.png',
+        'images/olivier%20bastidon%20champ.jpeg',
+        'images/sillans-la-cascade%20riviere.jpg'
+    ];
+
     let downloading    = false;
     let autoCloseTimer = null;
 
@@ -74,30 +96,47 @@
         dlStateInit.classList.add('dl-hidden');
         dlStateProgress.classList.remove('dl-hidden');
 
-        let progress = 0;
-        const tick = 50;
-        const step = (tick / 5000) * 100;
+        const total = ASSETS.length;
+        let done = 0;
 
-        const timer = setInterval(function () {
-            progress = Math.min(progress + step, 100);
-            dlProgressFill.style.width = progress + '%';
+        const swReady = ('serviceWorker' in navigator)
+            ? navigator.serviceWorker.register('sw.js').catch(function () { return null; })
+            : Promise.resolve(null);
 
-            if (progress >= 100) {
-                clearInterval(timer);
-                setTimeout(function () {
-                    dlStateProgress.classList.add('dl-hidden');
-                    dlStateDone.classList.remove('dl-hidden');
-                    downloading = false;
+        swReady.then(function () {
+            if (!('caches' in window)) { finishDownload(); return; }
 
-                    // Fermer et masquer définitivement après 2,5 s
-                    autoCloseTimer = setTimeout(function () {
-                        dlWidget.classList.remove('prohib-open');
-                        resetDlPanel();
-                        dlWidget.classList.add('dl-hidden');
-                    }, 2500);
-                }, 300);
-            }
-        }, tick);
+            caches.open(CACHE_NAME).then(function (cache) {
+                function fetchNext() {
+                    if (done >= total) { finishDownload(); return; }
+                    cache.add(ASSETS[done])
+                        .catch(function () {})
+                        .then(function () {
+                            done++;
+                            dlProgressFill.style.width = (done / total * 100) + '%';
+                            fetchNext();
+                        });
+                }
+                fetchNext();
+            }).catch(function () { finishDownload(); });
+        });
+
+        function finishDownload() {
+            localStorage.setItem('dlDone', '1');
+            localStorage.setItem('dlVersion', '2');
+
+            setTimeout(function () {
+                dlStateProgress.classList.add('dl-hidden');
+                dlStateDone.classList.remove('dl-hidden');
+                downloading = false;
+
+                autoCloseTimer = setTimeout(function () {
+                    dlWidget.classList.remove('prohib-open');
+                    resetDlPanel();
+                    dlWidget.classList.add('dl-hidden');
+                }, 2500);
+            }, 300);
+        }
     });
 
     // ── NON MERCI → fermer le widget ─────────────────────────────────────
