@@ -151,6 +151,13 @@ p {
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
+.poi::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+}
+
 .poi.active,
 .poi.validated {
     background-color: #03658C;
