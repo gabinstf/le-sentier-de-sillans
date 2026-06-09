@@ -552,35 +552,59 @@ p {
 }
 
 .prohib-item.prohib-open {
-    width: 200px;
+    width: 220px;
 }
 
-/* ── Images des interdictions (icône fixe à gauche) ── */
-.prohib-img {
+/* ── Icône SVG (carré fixe à gauche) ── */
+.prohib-icon {
     width: 44px;
     height: 44px;
-    padding: 4px;
-    object-fit: contain;
     flex-shrink: 0;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
     box-sizing: border-box;
 }
 
-/* ── Texte des interdictions (glisse vers la droite) ── */
-.prohib-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.76rem;
-    font-weight: 600;
-    color: #E84F4F;
-    white-space: nowrap;
-    padding: 0 14px 0 10px;
-    flex-shrink: 0;
-    opacity: 0;
-    transition: opacity 0.12s ease 0.1s;
+.prohib-icon svg {
+    width: 100%;
+    height: 100%;
 }
 
-.prohib-item.prohib-open .prohib-text {
+/* ── Corps texte (titre + desc, glisse vers la droite) ── */
+.prohib-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0 12px 0 6px;
+    opacity: 0;
+    transition: opacity 0.12s ease 0.1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.prohib-item.prohib-open .prohib-body {
     opacity: 1;
+}
+
+.prohib-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #2a3540;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.prohib-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: #7a8a92;
+    white-space: nowrap;
+    line-height: 1.2;
 }
 
 /* ── Widget téléchargement : override hauteur + largeur ── */
