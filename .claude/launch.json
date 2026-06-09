@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sentier-de-sillans",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-c", "cd /tmp && python3 -c \"import http.server,socketserver,functools; H=functools.partial(http.server.SimpleHTTPRequestHandler,directory='/Users/axelbureau/Documents/sae cascade/site web/le-sentier-de-sillans'); socketserver.TCPServer(('',4201),H).serve_forever()\""],
+      "port": 4201
+    }
+  ]
+}

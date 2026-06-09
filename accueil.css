@@ -1,0 +1,262 @@
+/* ── Override body (style.css fournit max-width:430px, margin:0 auto) ── */
+body {
+    background-color: #02223a;
+    background-image: url('images/fond cascade accueil données.png');
+    background-size: cover;
+    background-position: center top;
+    height: auto;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ── Wrapper ──────────────────────────────────────────────────────────── */
+.ac-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 22px;
+    text-align: center;
+    color: white;
+    position: relative;
+    min-height: 100dvh;
+}
+
+/* Overlay sombre sur le fond */
+.ac-wrapper::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 28, 50, 0.52);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ac-wrapper > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Logo haut ────────────────────────────────────────────────────────── */
+.ac-top {
+    padding-top: 52px;
+    padding-bottom: 10px;
+    flex-shrink: 0;
+}
+
+.ac-logo {
+    height: 96px;
+    width: auto;
+}
+
+/* ── Bloc central (flex:1 → centré verticalement) ────────────────────── */
+.ac-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 14px;
+    padding: 18px 0;
+}
+
+/* ── Rappel ───────────────────────────────────────────────────────────── */
+.ac-rappel {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 400;
+    color: white;
+    opacity: 0.92;
+    margin: 0;
+}
+
+/* ── Contenu initial ──────────────────────────────────────────────────── */
+.ac-initial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ac-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    max-width: 320px;
+}
+
+/* ── Boutons ──────────────────────────────────────────────────────────── */
+.ac-btns {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 260px;
+}
+
+.ac-btn {
+    flex: 1;
+    font-family: 'Marky', sans-serif;
+    font-weight: normal;
+    font-size: 1rem;
+    background: white;
+    color: #03658C;
+    border: 2px solid white;
+    border-radius: 0;
+    padding: 13px 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+}
+
+.ac-btn#acBtnNo {
+    background: transparent;
+    color: white;
+}
+
+.ac-btn:active {
+    opacity: 0.75;
+}
+
+/* ── Texte fin ────────────────────────────────────────────────────────── */
+.ac-fine {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    color: white;
+    opacity: 0.82;
+    line-height: 1.6;
+    max-width: 310px;
+    text-align: left;
+    margin-bottom: 16px;
+}
+
+.ac-fine p {
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 6px;
+}
+
+.ac-fine strong {
+    font-weight: 700;
+}
+
+.ac-sep {
+    width: 100%;
+    max-width: 310px;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 12px;
+}
+
+.ac-more {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+}
+
+/* ── Logo Var ─────────────────────────────────────────────────────────── */
+.ac-footer {
+    padding: 16px 0 48px;
+    flex-shrink: 0;
+}
+
+.ac-var {
+    height: 54px;
+    width: auto;
+}
+
+/* ── État téléchargement ──────────────────────────────────────────────── */
+.ac-dl {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.ac-dl.active {
+    display: flex;
+}
+
+.ac-warning {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    color: white;
+    line-height: 1.6;
+    opacity: 0.88;
+}
+
+/* ── Cercle de progression ────────────────────────────────────────────── */
+.ac-ring-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.ac-ring-svg {
+    width: 150px;
+    height: 150px;
+    transform: rotate(-90deg);
+}
+
+.ac-ring-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 5;
+}
+
+.ac-ring-fill {
+    fill: none;
+    stroke: white;
+    stroke-width: 5;
+    stroke-dasharray: 326.73;
+    stroke-dashoffset: 326.73;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.ac-ring-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Marky', sans-serif;
+    font-size: 2.6rem;
+    color: white;
+    line-height: 1;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* ── Textes fin de téléchargement ─────────────────────────────────────── */
+.ac-done {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    color: white;
+    visibility: hidden;
+}
+
+.ac-done.visible { visibility: visible; }
+
+.ac-redirect {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    opacity: 0.82;
+    visibility: hidden;
+}
+
+.ac-redirect.visible { visibility: visible; }
