@@ -7,12 +7,12 @@
 
   const MAP_COORDS = [
     { x: 1788, y: 1608  }, // 1 – Centre-ville sud
-    { x: 1556, y: 2435  }, // 2 – Centre-ville milieu
+    { x: 1554, y: 2418  }, // 2 – Centre-ville milieu
     { x: 2622, y: 3242  }, // 3 – Centre-ville nord
-    { x: 3099, y: 3445  }, // 4 – Oliveraie
-    { x: 3305, y: 3270  }, // 5 – Forêt (début)
-    { x: 3423, y: 3100  }, // 6 – Forêt (milieu)
-    { x: 2569, y: 1900  }, // 7 – Près de la cascade
+    { x: 3095, y: 3458  }, // 4 – Oliveraie
+    { x: 3225, y: 3255  }, // 5 – Forêt (début)
+    { x: 3505, y: 2825  }, // 6 – Forêt (milieu)
+    { x: 2575, y: 1910  }, // 7 – Près de la cascade
     { x: 2216, y: 1353  }, // 8 – Cascade
     { x: 1770, y: 1152  }, // 9 – Bresque (sud)
     { x: 1601, y: 1489  }, // 10 – Bresque (nord / ville)
