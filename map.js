@@ -111,6 +111,13 @@
     localStorage.setItem('lastPoiId', id);
   }
 
+  function hideBanner() {
+    document.getElementById('poiBanner').classList.remove('visible');
+    currentBannerPoiId = null;
+    bannerEverShown = false;
+    setActivePoi(null);
+  }
+
   // ── Utilitaires ───────────────────────────────────────────────────────────
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
@@ -257,24 +264,19 @@
   }
 
   (function () {
-    var targets = [
-      document.getElementById('poiBanner'),
-      container,
-    ];
-    targets.forEach(function (el) {
-      var sx = 0, sy = 0;
-      el.addEventListener('touchstart', function (e) {
-        sx = e.touches[0].clientX;
-        sy = e.touches[0].clientY;
-      }, { passive: true });
-      el.addEventListener('touchend', function (e) {
-        if (currentBannerPoiId === null) return;
-        var dx = e.changedTouches[0].clientX - sx;
-        var dy = e.changedTouches[0].clientY - sy;
-        if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
-        navigatePoi(dx < 0 ? 1 : -1);
-      }, { passive: true });
-    });
+    var banner = document.getElementById('poiBanner');
+    var sx = 0, sy = 0;
+    banner.addEventListener('touchstart', function (e) {
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    }, { passive: true });
+    banner.addEventListener('touchend', function (e) {
+      if (currentBannerPoiId === null) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+      navigatePoi(dx < 0 ? 1 : -1);
+    }, { passive: true });
   }());
 
   // ── Init carte ────────────────────────────────────────────────────────────
@@ -311,6 +313,7 @@
 
   let prevDist = 0, prevMx = 0, prevMy = 0;
   let pinching = false, panning = false, prevPx = 0, prevPy = 0;
+  let tapStartX = 0, tapStartY = 0;
 
   function touchDist(a, b) {
     return Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
@@ -335,6 +338,8 @@
       panning = true; pinching = false;
       prevPx = e.touches[0].clientX;
       prevPy = e.touches[0].clientY;
+      tapStartX = e.touches[0].clientX;
+      tapStartY = e.touches[0].clientY;
     }
   }, { passive: false });
 
@@ -367,16 +372,27 @@
       prevPx = e.touches[0].clientX;
       prevPy = e.touches[0].clientY;
     }
-    if (e.touches.length === 0) panning = false;
+    if (e.touches.length === 0) {
+      panning = false;
+      const dx = Math.abs(e.changedTouches[0].clientX - tapStartX);
+      const dy = Math.abs(e.changedTouches[0].clientY - tapStartY);
+      if (dx < 10 && dy < 10) hideBanner();
+    }
   }, { passive: false });
 
   // ── Mouse (desktop) ───────────────────────────────────────────────────────
 
-  let dragging = false, pdx = 0, pdy = 0;
+  let dragging = false, pdx = 0, pdy = 0, mDownX = 0, mDownY = 0;
 
   container.addEventListener('mousedown', function (e) {
     dragging = true; pdx = e.clientX; pdy = e.clientY;
+    mDownX = e.clientX; mDownY = e.clientY;
     container.style.cursor = 'grabbing';
+  });
+
+  container.addEventListener('click', function (e) {
+    if (e.target.closest('.poi')) return;
+    if (Math.abs(e.clientX - mDownX) < 5 && Math.abs(e.clientY - mDownY) < 5) hideBanner();
   });
 
   window.addEventListener('mousemove', function (e) {
