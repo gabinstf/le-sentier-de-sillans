@@ -1,6 +1,5 @@
 // ── ÉTAT ─────────────────────────────────────────────────────────────────────
 
-const TOTAL = SILLANS_POIS.length;
 let currentPoi = null;
 let galleryIndex = 0;
 
@@ -77,25 +76,6 @@ function initSwipe() {
     });
 }
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
-
-function buildNav(id) {
-    const prev  = document.getElementById('btnPrev');
-    const next  = document.getElementById('btnNext');
-    const count = document.getElementById('poiNavCount');
-    prev.disabled = id <= 1;
-    next.disabled = id >= TOTAL;
-    count.textContent = id + ' / ' + TOTAL;
-    prev.onclick = function() { navigateTo(id - 1); };
-    next.onclick = function() { navigateTo(id + 1); };
-}
-
-function navigateTo(id) {
-    const url = new URL(window.location.href);
-    url.searchParams.set('id', id);
-    window.goTo(url.toString());
-}
-
 // ── CONTENU ───────────────────────────────────────────────────────────────────
 
 function buildContent(poi) {
@@ -135,7 +115,6 @@ function render() {
 
     document.title = poi.title + ' — Le Sentier de Sillans';
     buildGallery(poi);
-    buildNav(poi.id);
     buildContent(poi);
     initSwipe();
 }
