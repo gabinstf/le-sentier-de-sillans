@@ -1,7 +1,4 @@
 (function () {
-  if (sessionStorage.getItem('splashDone')) return;
-  sessionStorage.setItem('splashDone', '1');
-
   const style = document.createElement('style');
   style.textContent = `
     .splash { position:fixed; inset:0; z-index:9999; }
