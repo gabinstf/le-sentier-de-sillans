@@ -301,7 +301,7 @@
     const newMin = container.clientHeight / img.naturalHeight;
     if (scale <= minScale) { scale = newMin; targetScale = newMin; }
     minScale = newMin;
-    maxScale = newMin * 1.5;
+    maxScale = newMin * 3;
     clampBounds();
     targetTx = tx; targetTy = ty;
     render();

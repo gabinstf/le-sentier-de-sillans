@@ -13,7 +13,7 @@
 
     // ── NON MERCI → aller directement à la carte ──────────────────────────
     acBtnNo.addEventListener('click', function () {
-        window.location.href = 'index.html';
+        window.goTo('index.html');
     });
 
     // ── D'ACCORD → lancer le téléchargement ───────────────────────────────
@@ -66,7 +66,7 @@
                         // Redirection vers la carte après 3 secondes
                         setTimeout(function () {
                             clearInterval(dotsTimer);
-                            window.location.href = 'index.html';
+                            window.goTo('index.html');
                         }, 3000);
                     }, 350);
                 }, 600);
