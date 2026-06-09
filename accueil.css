@@ -1,7 +1,7 @@
 /* ── Override body (style.css fournit max-width:430px, margin:0 auto) ── */
 body {
     background-color: #02223a;
-    background-image: url('images/fond cascade accueil données.png');
+    background-image: url('images/accueil-fond.webp');
     background-size: cover;
     background-position: center top;
     height: auto;
