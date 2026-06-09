@@ -245,6 +245,38 @@
   setActivePoi(savedPoiId);
   updatePoiStates();
 
+  // ── Swipe entre POIs (bandeau + carte) ───────────────────────────────────
+
+  function navigatePoi(direction) {
+    if (currentBannerPoiId === null) return;
+    const newId = currentBannerPoiId + direction;
+    if (newId < 1 || newId > MAP_COORDS.length) return;
+    setActivePoi(newId);
+    centerOnPoi(newId - 1);
+    showBanner(newId);
+  }
+
+  (function () {
+    var targets = [
+      document.getElementById('poiBanner'),
+      container,
+    ];
+    targets.forEach(function (el) {
+      var sx = 0, sy = 0;
+      el.addEventListener('touchstart', function (e) {
+        sx = e.touches[0].clientX;
+        sy = e.touches[0].clientY;
+      }, { passive: true });
+      el.addEventListener('touchend', function (e) {
+        if (currentBannerPoiId === null) return;
+        var dx = e.changedTouches[0].clientX - sx;
+        var dy = e.changedTouches[0].clientY - sy;
+        if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+        navigatePoi(dx < 0 ? 1 : -1);
+      }, { passive: true });
+    });
+  }());
+
   // ── Init carte ────────────────────────────────────────────────────────────
 
   function initMap() {
