@@ -20,7 +20,7 @@
         'fonts/Outfit-VariableFont_wght.ttf', 'fonts/marky.otf', 'fonts/marky.ttf',
         'stats.html', 'stats.css', 'stats.js',
         'images/logo.svg',
-        'images/carte.webp',
+        'images/carte.png',
         'images/accueil-fond.webp',
         'images/logo-var.webp',
         'images/baignade-interdite.webp',

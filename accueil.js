@@ -25,7 +25,7 @@
         'fonts/marky.otf',
         'fonts/marky.ttf',
         'images/logo.svg',
-        'images/carte.webp',
+        'images/carte.png',
         'images/accueil-fond.webp',
         'images/logo-var.webp',
         'images/baignade-interdite.webp',
