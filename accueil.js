@@ -1,5 +1,5 @@
 (function () {
-    var CACHE_NAME = 'sentier-sillans-v1';
+    var CACHE_NAME = 'sentier-sillans-v2';
 
     var ASSETS = [
         'index.html',
@@ -104,6 +104,7 @@
 
     function finishDownload() {
         localStorage.setItem('dlDone', '1');
+        localStorage.setItem('dlVersion', '2');
         sessionStorage.setItem('acPassed', '1');
 
         acRingFill.style.strokeDashoffset = 0;

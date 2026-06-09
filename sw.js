@@ -1,4 +1,8 @@
-var CACHE = 'sentier-sillans-v1';
+var CACHE = 'sentier-sillans-v2';
+
+self.addEventListener('install', function () {
+    self.skipWaiting();
+});
 
 self.addEventListener('activate', function (e) {
     e.waitUntil(
@@ -14,8 +18,9 @@ self.addEventListener('activate', function (e) {
 });
 
 self.addEventListener('fetch', function (e) {
+    // ignoreSearch : interet.html?id=1 matche le cache entry 'interet.html'
     e.respondWith(
-        caches.match(e.request).then(function (cached) {
+        caches.match(e.request, { ignoreSearch: true }).then(function (cached) {
             return cached || fetch(e.request);
         })
     );
