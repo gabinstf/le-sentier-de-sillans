@@ -1,0 +1,309 @@
+/* ── Override body (scrollable comme interet.html) ────────────────────────── */
+body {
+    height: auto;
+    min-height: 100dvh;
+    overflow: auto;
+}
+
+.main-content {
+    display: block;
+    overflow: visible;
+}
+
+/* ── Conteneur de scroll ──────────────────────────────────────────────────── */
+.st-scroll {
+    padding: 16px 14px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── En-tête de section ───────────────────────────────────────────────────── */
+.st-subhead {
+    padding: 4px 2px 4px;
+}
+
+.st-title {
+    font-family: 'Marky', sans-serif;
+    font-size: 2.2rem;
+    color: #03658C;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.st-subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #999;
+    line-height: 1.4;
+}
+
+/* ── Carte héro ───────────────────────────────────────────────────────────── */
+.st-hero {
+    background: #03658C;
+    border-radius: 20px;
+    padding: 22px 24px 22px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-hero::before {
+    content: '';
+    position: absolute;
+    right: -28px;
+    top: -28px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    pointer-events: none;
+}
+
+.st-hero::after {
+    content: '';
+    position: absolute;
+    right: 40px;
+    bottom: -18px;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.st-hero-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+}
+
+.st-hero-num {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: 'Marky', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: white;
+}
+
+.st-hero-unit {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    padding-bottom: 7px;
+}
+
+/* ── Grille 2 colonnes ────────────────────────────────────────────────────── */
+.st-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* ── Carte de base ────────────────────────────────────────────────────────── */
+.st-card {
+    border-radius: 16px;
+    padding: 15px 15px 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-card--bleu   { background: #e0f3f9; color: #03658C; }
+.st-card--neutre { background: #f0f4f6; color: #2a4a5a; }
+.st-card--blanc  { background: white;   color: #03658C; }
+.st-card--vert   { background: #e8f4ee; color: #1a5c3a; }
+.st-card--chaud  { background: #f7f3e8; color: #6b5a1a; }
+.st-card--violet { background: #eee8f4; color: #4a2a8c; }
+.st-card--orange { background: #f4ede8; color: #6b3a1a; }
+
+.st-card-icon {
+    margin-bottom: 10px;
+}
+
+.st-card-icon svg {
+    width: 20px;
+    height: 20px;
+    opacity: 0.75;
+}
+
+/* ── Nombre principal dans une carte ─────────────────────────────────────── */
+.st-num {
+    font-family: 'Marky', sans-serif;
+    font-size: 2.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.st-unit {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.st-num-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.6;
+    margin-top: 2px;
+}
+
+.st-card-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    opacity: 0.55;
+    margin-top: 8px;
+}
+
+/* ── Carte progression ────────────────────────────────────────────────────── */
+.st-prog-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-bottom: 12px;
+}
+
+.st-prog-dots {
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.st-prog-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #03658C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Marky', sans-serif;
+    font-size: 10.5px;
+    color: #03658C;
+    flex-shrink: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+.st-prog-dot.done {
+    background: #03658C;
+    color: white;
+}
+
+.st-prog-count {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #03658C;
+}
+
+/* ── Carte mémoire (sombre, pleine largeur) ───────────────────────────────── */
+.st-hist {
+    background: #02223a;
+    border-radius: 20px;
+    padding: 28px 24px 26px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-hist::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(72, 173, 204, 0.09);
+    pointer-events: none;
+}
+
+.st-hist::after {
+    content: '';
+    position: absolute;
+    right: -24px;
+    bottom: -32px;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(72, 173, 204, 0.06);
+    pointer-events: none;
+}
+
+.st-hist-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(72, 173, 204, 0.65);
+    margin-bottom: 10px;
+}
+
+.st-hist-num {
+    font-family: 'Marky', sans-serif;
+    font-size: 4.8rem;
+    line-height: 1;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.st-hist-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+}
+
+/* ── Bouton footer actif (stats page) ────────────────────────────────────── */
+.footer-btn--active {
+    position: relative;
+}
+
+.footer-btn--active::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #03658C;
+}
+
+/* ── Animations d'entrée (transform uniquement) ───────────────────────────── */
+@keyframes stIn {
+    from { transform: translateY(28px); }
+    to   { transform: translateY(0); }
+}
+
+.st-scroll > *:nth-child(1) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.04s; }
+.st-scroll > *:nth-child(2) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.09s; }
+.st-scroll > *:nth-child(3) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.14s; }
+.st-scroll > *:nth-child(4) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.18s; }
+.st-scroll > *:nth-child(5) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.22s; }
+.st-scroll > *:nth-child(6) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.26s; }
+.st-scroll > *:nth-child(7) { animation: stIn 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both; animation-delay: 0.30s; }

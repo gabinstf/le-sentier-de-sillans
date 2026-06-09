@@ -18,6 +18,7 @@
         'transitions.js', 'weather.js', 'map.js', 'interet.js',
         'accueil.js', 'download.js', 'splash.js', 'data.js', 'sw.js',
         'fonts/Outfit-VariableFont_wght.ttf', 'fonts/marky.otf', 'fonts/marky.ttf',
+        'stats.html', 'stats.css', 'stats.js',
         'images/logo.svg', 'images/carte.png', 'images/photo_cascade.png',
         'images/RUE%20SILLANS%20LA%20CASCADE.png',
         'images/Sillans_la_Cascade_%C3%A9glise.jpeg',

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <script>var _DLV='2';if(localStorage.getItem('dlVersion')!==_DLV){localStorage.removeItem('dlDone');}if(!localStorage.getItem('dlDone')&&!sessionStorage.getItem('acPassed')){location.replace('accueil.html');}</script>
+    <title>Statistiques — Le Sentier de Sillans</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stats.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-logo">
+            <img src="images/logo.svg" alt="Le sentier de Sillans" class="logo-img">
+        </div>
+        <div class="header-weather">
+            <svg id="weatherIcon" class="weather-icon" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="30" cy="14" r="9" fill="white" opacity="0.9"/>
+                <path d="M30 5 L30 2M30 23 L30 26M39 14 L42 14M21 14 L18 14M36.4 8.6 L38.5 6.5M23.6 19.4 L21.5 21.5M36.4 19.4 L38.5 21.5M23.6 8.6 L21.5 6.5" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <rect x="6" y="20" width="28" height="14" rx="7" fill="white"/>
+                <rect x="12" y="14" width="16" height="12" rx="6" fill="white"/>
+            </svg>
+            <span id="weatherText" class="weather-text">–</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="st-scroll">
+
+            <!-- Sous-titre de page -->
+            <div class="st-subhead">
+                <h1 class="st-title">Mes stats</h1>
+                <p class="st-subtitle" id="stSubtitle">–</p>
+            </div>
+
+            <!-- ── HÉRO : distance ────────────────────────────────────────── -->
+            <div class="st-hero">
+                <p class="st-hero-tag">DISTANCE PARCOURUE</p>
+                <div class="st-hero-num">
+                    <span id="statDist">0</span><span class="st-hero-unit">m</span>
+                </div>
+            </div>
+
+            <!-- ── RANG 1 : temps + pas ───────────────────────────────────── -->
+            <div class="st-row">
+                <div class="st-card st-card--bleu">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statMins">0</span></div>
+                    <p class="st-num-sub">min</p>
+                    <p class="st-card-label">dans la nature</p>
+                </div>
+                <div class="st-card st-card--neutre">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="9" cy="4" r="2" fill="currentColor" opacity=".8"/>
+                            <ellipse cx="15" cy="7" rx="2" ry="2" fill="currentColor" opacity=".5"/>
+                            <path d="M6 8c1-1 3-1.5 5 0l2 6M8 14l-1 5M13 14l1 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statPas">0</span></div>
+                    <p class="st-card-label">pas effectués</p>
+                </div>
+            </div>
+
+            <!-- ── PROGRESSION ────────────────────────────────────────────── -->
+            <div class="st-card st-card--blanc">
+                <p class="st-prog-label">PROGRESSION DU PARCOURS</p>
+                <div class="st-prog-dots" id="stProgDots"></div>
+                <p class="st-prog-count" id="statEtapesLabel">0 / 10 étapes validées</p>
+            </div>
+
+            <!-- ── RANG 2 : végétales + animales ─────────────────────────── -->
+            <div class="st-row">
+                <div class="st-card st-card--vert">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M17 8C8 10 5.9 16.17 3.82 19c2-1 4.17-1.82 5.18-3.68C10 17 11 19 12 19c4.5 0 7-4 7-8 0-2-.5-4-2-5l-4 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statVeg">0</span></div>
+                    <p class="st-card-label">espèces végétales</p>
+                </div>
+                <div class="st-card st-card--chaud">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <ellipse cx="8.5" cy="6" rx="2" ry="2.5" fill="currentColor" opacity=".75"/>
+                            <ellipse cx="14" cy="5.5" rx="1.8" ry="2.2" fill="currentColor" opacity=".75"/>
+                            <ellipse cx="5.5" cy="10.5" rx="1.8" ry="2.2" fill="currentColor" opacity=".75"/>
+                            <ellipse cx="17.5" cy="10" rx="1.8" ry="2.2" fill="currentColor" opacity=".75"/>
+                            <path d="M11.5 20c-3.2 0-6.5-2.2-6.5-5 0-2 1.5-3.5 3.5-3.5 1 0 1.5.5 3 .5s2-.5 3-.5c2 0 3.5 1.5 3.5 3.5 0 2.8-3.3 5-6.5 5z" fill="currentColor" opacity=".75"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statAnim">0</span></div>
+                    <p class="st-card-label">espèces animales</p>
+                </div>
+            </div>
+
+            <!-- ── RANG 3 : dénivelé + calories ──────────────────────────── -->
+            <div class="st-row">
+                <div class="st-card st-card--violet">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M3 18l5-9 4 5.5 3-4.5 6 8H3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17 5l2-2M17 5l-2-2M17 5V2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statDeniv">0</span><span class="st-unit">m</span></div>
+                    <p class="st-card-label">dénivelé cumulé</p>
+                </div>
+                <div class="st-card st-card--orange">
+                    <div class="st-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22c3.5 0 6-2.5 6-5.5 0-2-.8-3.5-2-4.5-.2 1.2-.8 2-1.5 2.5-.2-2-1-4-2.5-5.5-1 2.5-3 3.5-3 6C9 18 10 22 12 22z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="st-num"><span id="statCal">0</span></div>
+                    <p class="st-num-sub">kcal</p>
+                    <p class="st-card-label">calories brûlées</p>
+                </div>
+            </div>
+
+            <!-- ── CARTE MÉMOIRE (grande, sombre) ────────────────────────── -->
+            <div class="st-hist">
+                <p class="st-hist-tag">MÉMOIRE COLLECTIVE</p>
+                <div class="st-hist-num"><span id="statHist">0</span></div>
+                <p class="st-hist-label">années d'histoire<br>arpentées</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <button class="footer-btn" aria-label="Informations">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#1a6b8a" stroke-width="2"/>
+                <path d="M12 11 L12 17" stroke="#1a6b8a" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="12" cy="7.5" r="1.2" fill="#1a6b8a"/>
+            </svg>
+        </button>
+        <div class="footer-center">
+            <button class="footer-map-btn" aria-label="Carte" onclick="window.goTo('index.html')">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/>
+                    <circle cx="12" cy="9" r="2.5" fill="#1a6b8a"/>
+                </svg>
+            </button>
+        </div>
+        <button class="footer-btn footer-btn--active" aria-label="Statistiques">
+            <svg viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="13" width="3.5" height="7" rx="1" fill="#03658C"/>
+                <rect x="10.25" y="8" width="3.5" height="12" rx="1" fill="#03658C"/>
+                <rect x="16.5" y="4" width="3.5" height="16" rx="1" fill="#03658C"/>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="transitions.js"></script>
+    <script src="weather.js"></script>
+    <script src="stats.js"></script>
+
+</body>
+</html>
