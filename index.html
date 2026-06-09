@@ -28,6 +28,56 @@
     <main class="main-content">
         <div class="map-container" id="mapContainer">
             <img src="images/carte.png" alt="Carte du sentier de Sillans" class="map-image" id="mapImage" draggable="false">
+
+            <!-- Panneau droit : téléchargement + interdictions -->
+            <div class="prohib-panel">
+
+                <!-- Téléchargement -->
+                <div class="prohib-item" id="dlWidget">
+                    <button class="dl-icon-btn" id="dlTriggerBtn" aria-label="Télécharger les données">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="dl-content">
+                        <div id="dlStateInit">
+                            <p class="dl-panel-title">TÉLÉCHARGER LES DONNÉES<br>POUR UNE MEILLEURE NAVIGATION</p>
+                            <div class="dl-panel-choices">
+                                <button class="dl-btn-ok" id="dlBtnOk">D'ACCORD</button>
+                                <button class="dl-btn-no" id="dlBtnNo">NON MERCI</button>
+                            </div>
+                        </div>
+                        <div id="dlStateProgress" class="dl-hidden">
+                            <p class="dl-panel-sub">Téléchargement en cours.</p>
+                            <div class="dl-progress-track">
+                                <div class="dl-progress-fill" id="dlProgressFill"></div>
+                            </div>
+                        </div>
+                        <div id="dlStateDone" class="dl-hidden">
+                            <p class="dl-panel-sub">Téléchargement fini.</p>
+                            <svg class="dl-check-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="20" cy="20" r="18" fill="#03658C"/>
+                                <polyline points="11,20 17,27 29,12" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Baignade interdite -->
+                <button class="prohib-item" id="prohibBtn1" aria-label="Baignade interdite">
+                    <img class="prohib-img" src="images/baignade interdite.png" alt="">
+                    <span class="prohib-text">Baignade interdite</span>
+                </button>
+
+                <!-- Interdiction de fumer -->
+                <button class="prohib-item" id="prohibBtn2" aria-label="Interdiction de fumer">
+                    <img class="prohib-img" src="images/cigarette interdiction.png" alt="">
+                    <span class="prohib-text">Interdiction de fumer</span>
+                </button>
+
+            </div>
         </div>
 
         <div class="poi-banner" id="poiBanner">
@@ -77,5 +127,6 @@
     <script src="weather.js"></script>
     <script src="data.js"></script>
     <script src="map.js"></script>
+    <script src="download.js"></script>
 </body>
 </html>

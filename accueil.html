@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Le Sentier de Sillans</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="accueil.css">
+</head>
+<body>
+
+    <div class="ac-wrapper">
+
+        <!-- Logo haut — toujours visible -->
+        <div class="ac-top">
+            <img src="images/logo.svg" alt="Le Sentier de Sillans" class="ac-logo">
+        </div>
+
+        <!-- Bloc central — flex:1, centré verticalement -->
+        <div class="ac-main">
+
+            <!-- Rappel — toujours visible pendant le téléchargement aussi -->
+            <p class="ac-rappel">Rappel : aucune connexion sur le sentier</p>
+
+            <!-- Contenu initial -->
+            <div class="ac-initial" id="acInitial">
+                <p class="ac-desc">Pour profiter d'une expérience en temps réel sur le site, veuillez télécharger les données en amont.</p>
+                <div class="ac-btns">
+                    <button class="ac-btn" id="acBtnOk">D'ACCORD</button>
+                    <button class="ac-btn" id="acBtnNo">NON MERCI</button>
+                </div>
+                <div class="ac-fine">
+                    <p><strong>En choisissant « d'accord »</strong>, la web app utilisera le stockage local de votre appareil pour précharger les données du site, garantissant un accès rapide et un fonctionnement même sans connexion. Idéal sur le sentier.</p>
+                    <p><strong>En choisissant « non merci »</strong>, vous accéderez au site sans téléchargement. Ce sera cependant moins pratique sur le sentier, le site n'étant pas utilisable sans connexion.</p>
+                </div>
+                <hr class="ac-sep">
+                <p class="ac-more">EN SAVOIR PLUS SUR LE TÉLÉCHARGEMENT</p>
+            </div>
+
+            <!-- État téléchargement — masqué initialement -->
+            <div class="ac-dl" id="acDl">
+                <p class="ac-warning">Veuillez ne pas fermer la page<br>pendant le téléchargement.</p>
+                <div class="ac-ring-wrap">
+                    <svg class="ac-ring-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="ac-ring-track" cx="60" cy="60" r="52"/>
+                        <circle class="ac-ring-fill" id="acRingFill" cx="60" cy="60" r="52"/>
+                    </svg>
+                    <div class="ac-ring-label" id="acRingLabel">0</div>
+                </div>
+                <p class="ac-done" id="acDone">Téléchargement terminé.</p>
+                <p class="ac-redirect" id="acRedirect">Redirection en cours<span id="acDots">.</span></p>
+            </div>
+
+        </div>
+
+        <!-- Logo Var — toujours visible -->
+        <div class="ac-footer">
+            <img src="images/logo dpt du var blanc.png" alt="Le Département du Var" class="ac-var">
+        </div>
+
+    </div>
+
+    <script src="accueil.js"></script>
+</body>
+</html>
