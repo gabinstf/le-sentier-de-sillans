@@ -55,9 +55,9 @@ var SILLANS_POIS = [
         tagBg: "#eee8f4", tagColor: "#4a2a8c",
         etape: "4 / 10", temps: "10 min", km: "1,1",
         images: [
+            { type: "video", src: "video/panorama.mp4", alt: "Vidéo du panorama sur la cascade", grad: "linear-gradient(160deg,#4a8ccc,#2a4c8c)" },
             { src: "images/cascade.webp",       alt: "Vue sur la cascade de Sillans",  grad: "linear-gradient(160deg,#4a8ccc,#2a4c8c)" },
             { src: "images/cascade-chute.webp", alt: "La fontaine pétrifiante",        grad: "linear-gradient(160deg,#6aadd4,#3a6cac)" },
-            { src: null,                        alt: "Vue plongeante sur le bassin",   grad: "linear-gradient(160deg,#2a6cad,#1a3c7c)" },
         ],
         description: [
             "Ce belvédère offre le premier et le plus spectaculaire regard sur la cascade de Sillans, qui plonge de 42 mètres dans un bassin naturel aux reflets turquoise. La hauteur de la chute et le décor minéral qui l'encadre en font l'une des plus belles cascades du Var.",

@@ -1,5 +1,5 @@
 (function () {
-    var CACHE_NAME = 'sentier-sillans-v5';
+    var CACHE_NAME = 'sentier-sillans-v6';
 
     var ASSETS = [
         'index.html',
@@ -44,7 +44,8 @@
         'images/oliveraie.webp',
         'video/bastidon-oliveraie.mp4',
         'video/eglise.mp4',
-        'video/tuf.mp4'
+        'video/tuf.mp4',
+        'video/panorama.mp4'
     ];
 
     var acBtnOk     = document.getElementById('acBtnOk');
@@ -111,7 +112,7 @@
 
     function finishDownload() {
         localStorage.setItem('dlDone', '1');
-        localStorage.setItem('dlVersion', '5');
+        localStorage.setItem('dlVersion', '6');
         sessionStorage.setItem('acPassed', '1');
 
         acRingFill.style.strokeDashoffset = 0;

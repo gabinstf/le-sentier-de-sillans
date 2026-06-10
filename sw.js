@@ -1,4 +1,4 @@
-var CACHE = 'sentier-sillans-v5';
+var CACHE = 'sentier-sillans-v6';
 
 self.addEventListener('install', function () {
     self.skipWaiting();
