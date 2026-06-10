@@ -10,7 +10,7 @@
     const prohibBtn1      = document.getElementById('prohibBtn1');
     const prohibBtn2      = document.getElementById('prohibBtn2');
 
-    const CACHE_NAME = 'sentier-sillans-v7';
+    const CACHE_NAME = 'sentier-sillans-v8';
 
     const ASSETS = [
         'index.html', 'interet.html', 'accueil.html',
@@ -41,7 +41,8 @@
         'video/eglise.mp4',
         'video/tuf.mp4',
         'video/panorama.mp4',
-        'video/apropos.mp4'
+        'video/apropos.mp4',
+        'video/belvedere.mp4'
     ];
 
     let downloading    = false;
@@ -135,7 +136,7 @@
 
         function finishDownload() {
             localStorage.setItem('dlDone', '1');
-            localStorage.setItem('dlVersion', '7');
+            localStorage.setItem('dlVersion', '8');
 
             setTimeout(function () {
                 dlStateProgress.classList.add('dl-hidden');

@@ -1,5 +1,5 @@
 (function () {
-    var CACHE_NAME = 'sentier-sillans-v7';
+    var CACHE_NAME = 'sentier-sillans-v8';
 
     var ASSETS = [
         'index.html',
@@ -46,7 +46,8 @@
         'video/eglise.mp4',
         'video/tuf.mp4',
         'video/panorama.mp4',
-        'video/apropos.mp4'
+        'video/apropos.mp4',
+        'video/belvedere.mp4'
     ];
 
     var acBtnOk     = document.getElementById('acBtnOk');
@@ -113,7 +114,7 @@
 
     function finishDownload() {
         localStorage.setItem('dlDone', '1');
-        localStorage.setItem('dlVersion', '7');
+        localStorage.setItem('dlVersion', '8');
         sessionStorage.setItem('acPassed', '1');
 
         acRingFill.style.strokeDashoffset = 0;

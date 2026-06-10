@@ -87,9 +87,8 @@ var SILLANS_POIS = [
         tagBg: "#e8f4ee", tagColor: "#1a5c3a",
         etape: "6 / 10", temps: "10 min", km: "1,5",
         images: [
+            { type: "video", src: "video/belvedere.mp4", alt: "Vidéo du belvédère", grad: "linear-gradient(160deg,#3a8c6e,#1a5c4e)" },
             { src: "images/belvedere.webp", alt: "Vue depuis le belvédère",     grad: "linear-gradient(160deg,#3a8c6e,#1a5c4e)" },
-            { src: "images/cascade.webp",   alt: "Les falaises et la cascade",  grad: "linear-gradient(160deg,#4a9c7e,#2a6c5a)" },
-            { src: null,                    alt: "Chiroptères dans la falaise", grad: "linear-gradient(160deg,#2a7c5e,#1a4c3a)" },
         ],
         description: [
             "Ce belvédère offre un autre angle de vue sur la cascade tout en révélant un secret de la falaise : les fissures et anfractuosités de la roche calcaire abritent une importante colonie de chiroptères (chauves-souris). Ces mammifères nocturnes sortent à la tombée de la nuit pour chasser les insectes.",
