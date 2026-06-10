@@ -34,13 +34,13 @@ var SILLANS_POIS = [
     },
     {
         id: 3,
-        title: "Le tuff",
+        title: "Le tuf",
         tag: "Géologie",
         tagBg: "#f7f3e8", tagColor: "#6b5a1a",
         etape: "3 / 10", temps: "5 min", km: "0,8",
         images: [
+            { type: "video", src: "video/tuf.mp4", alt: "Vidéo des murets en tuf", grad: "linear-gradient(160deg,#c4ad7a,#8c7c4a)" },
             { src: "images/tuff.webp", alt: "Murets en tuf",          grad: "linear-gradient(160deg,#c4ad7a,#8c7c4a)" },
-            { src: null,               alt: "Surface poreuse du tuf",  grad: "linear-gradient(160deg,#d4bc8a,#9c8c5a)" },
         ],
         description: [
             "Les murets qui bordent ce tronçon du sentier sont construits en tuf — une roche volcanique et calcaire à la fois légère et poreuse. Cette matière, abondante dans les environs de Sillans, fut longtemps utilisée dans la construction locale pour ses propriétés isolantes.",
