@@ -135,7 +135,6 @@ var SILLANS_POIS = [
         etape: "9 / 10", temps: "5 min", km: "2,9",
         images: [
             { src: "images/lavoir.webp", alt: "Le lavoir de Sillans", grad: "linear-gradient(160deg,#adbc7a,#7c8c4a)" },
-            { src: null,                 alt: "Les bacs en pierre",   grad: "linear-gradient(160deg,#9cac6a,#6c7c3a)" },
         ],
         description: [
             "Le lavoir communal, situé rue des Remparts au bord de la Bresque, était au XIXe et au début du XXe siècle un lieu de vie sociale intense. Les femmes du village s'y retrouvaient chaque semaine pour laver le linge, partager les nouvelles et maintenir le lien communautaire.",
