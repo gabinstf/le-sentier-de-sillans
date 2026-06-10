@@ -50,17 +50,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 22px;
-    animation: infoIn 0.5s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+    /* Entrée : keyframe pageIn + tokens définis dans style.css */
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
 }
 
-.info-section:nth-child(1) .info-body { animation-delay: 0.04s; }
-.info-section:nth-child(2) .info-body { animation-delay: 0.13s; }
-.info-section:nth-child(3) .info-body { animation-delay: 0.22s; }
-
-@keyframes infoIn {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+.info-section:nth-child(1) .info-body { animation-delay: calc(var(--stagger) * 1); }
+.info-section:nth-child(2) .info-body { animation-delay: calc(var(--stagger) * 2); }
+.info-section:nth-child(3) .info-body { animation-delay: calc(var(--stagger) * 3); }
 
 .info-text {
     display: flex;

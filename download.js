@@ -10,17 +10,19 @@
     const prohibBtn1      = document.getElementById('prohibBtn1');
     const prohibBtn2      = document.getElementById('prohibBtn2');
 
-    const CACHE_NAME = 'sentier-sillans-v10';
+    const CACHE_NAME = APP_CACHE; // défini dans version.js
 
     const ASSETS = [
         'index.html', 'interet.html', 'accueil.html',
-        'style.css', 'map.css', 'interet.css', 'accueil.css',
+        'style.css', 'interet.css', 'accueil.css',
         'transitions.js', 'weather.js', 'map.js', 'interet.js',
-        'accueil.js', 'download.js', 'splash.js', 'data.js', 'sw.js',
+        'accueil.js', 'download.js', 'splash.js', 'data.js', 'version.js',
         'fonts/Outfit-VariableFont_wght.ttf', 'fonts/marky.otf', 'fonts/marky.ttf',
         'stats.html', 'stats.css', 'stats.js',
+        'info.html', 'info-aide.html', 'info-charte.html', 'info-apropos.html',
+        'info.css', 'info-pages.css',
         'images/logo.svg',
-        'images/carte.png',
+        'images/carte.webp',
         'images/accueil-fond.webp',
         'images/logo-var.webp',
         'images/baignade-interdite.webp',
@@ -46,6 +48,9 @@
         'video/bresque.mp4',
         'video/mairie.mp4'
     ];
+
+    const dlTitleEl   = dlWidget.querySelector('.dl-panel-title');
+    const dlTitleHTML = dlTitleEl.innerHTML;
 
     let downloading    = false;
     let autoCloseTimer = null;
@@ -85,6 +90,7 @@
     // ── Réinitialiser le widget téléchargement ────────────────────────────
     function resetDlPanel() {
         if (autoCloseTimer) { clearTimeout(autoCloseTimer); autoCloseTimer = null; }
+        dlTitleEl.innerHTML = dlTitleHTML;
         dlStateInit.classList.remove('dl-hidden');
         dlStateProgress.classList.add('dl-hidden');
         dlStateDone.classList.add('dl-hidden');
@@ -113,6 +119,7 @@
 
         const total = ASSETS.length;
         let done = 0;
+        let failed = 0;
 
         const swReady = ('serviceWorker' in navigator)
             ? navigator.serviceWorker.register('sw.js').catch(function () { return null; })
@@ -123,9 +130,12 @@
 
             caches.open(CACHE_NAME).then(function (cache) {
                 function fetchNext() {
-                    if (done >= total) { finishDownload(); return; }
+                    if (done >= total) {
+                        if (failed > 0) { failDownload(); } else { finishDownload(); }
+                        return;
+                    }
                     cache.add(ASSETS[done])
-                        .catch(function () {})
+                        .catch(function () { failed++; })
                         .then(function () {
                             done++;
                             dlProgressFill.style.width = (done / total * 100) + '%';
@@ -136,9 +146,25 @@
             }).catch(function () { finishDownload(); });
         });
 
+        // Au moins un fichier manque : ne PAS marquer dlDone, re-proposer
+        function failDownload() {
+            dlStateProgress.classList.add('dl-hidden');
+            dlStateInit.classList.remove('dl-hidden');
+            dlTitleEl.textContent =
+                'Téléchargement incomplet — vérifiez votre connexion et réessayez.';
+            dlProgressFill.style.width = '0%';
+            downloading = false;
+        }
+
         function finishDownload() {
+            // Purger les anciennes versions maintenant que la nouvelle est complète
+            if ('caches' in window) {
+                caches.keys().then(function (keys) {
+                    keys.forEach(function (k) { if (k !== CACHE_NAME) caches.delete(k); });
+                });
+            }
             localStorage.setItem('dlDone', '1');
-            localStorage.setItem('dlVersion', '10');
+            localStorage.setItem('dlVersion', APP_VERSION);
 
             setTimeout(function () {
                 dlStateProgress.classList.add('dl-hidden');

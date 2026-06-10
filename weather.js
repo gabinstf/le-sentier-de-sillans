@@ -4,7 +4,7 @@
   const CACHE_KEY = 'sillans_weather';
   const CACHE_TTL = 30 * 60 * 1000; // 30 min
 
-  const SVG_OPEN = '<svg id="weatherIcon" class="weather-icon" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">';
+  const SVG_OPEN = '<svg id="weatherIcon" class="weather-icon" aria-hidden="true" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">';
   const SVG_CLOSE = '</svg>';
 
   const ICONS = {
@@ -107,7 +107,10 @@
   } catch (e) {}
 
   fetch('https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON + '&current=temperature_2m,weather_code&timezone=Europe%2FParis')
-    .then(function (r) { return r.json(); })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
     .then(function (d) {
       const temp = Math.round(d.current.temperature_2m);
       const code = d.current.weather_code;

@@ -1,4 +1,9 @@
 (function () {
+  // Ne jouer le splash qu'une fois par session : sinon il rejoue (1,2 s)
+  // à chaque retour sur la carte depuis les autres pages.
+  if (sessionStorage.getItem('splashShown')) return;
+  sessionStorage.setItem('splashShown', '1');
+
   const style = document.createElement('style');
   style.textContent = `
     .splash { position:fixed; inset:0; z-index:9999; }

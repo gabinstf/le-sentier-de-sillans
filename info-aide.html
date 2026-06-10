@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <script>var _DLV='10';if(localStorage.getItem('dlVersion')!==_DLV){localStorage.removeItem('dlDone');}if(!localStorage.getItem('dlDone')&&!sessionStorage.getItem('acPassed')){location.replace('accueil.html');}</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="version.js"></script>
+    <script>if(localStorage.getItem('dlVersion')!==APP_VERSION){localStorage.removeItem('dlDone');}if(!localStorage.getItem('dlDone')&&!sessionStorage.getItem('acPassed')){location.replace('accueil.html');}</script>
     <title>Besoin d'aide — Le Sentier de Sillans</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="info-pages.css">
@@ -15,7 +16,7 @@
             <img src="images/logo.svg" alt="Le sentier de Sillans" class="logo-img">
         </div>
         <div class="header-weather">
-            <svg id="weatherIcon" class="weather-icon" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg id="weatherIcon" class="weather-icon" aria-hidden="true" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="30" cy="14" r="9" fill="white" opacity="0.9"/>
                 <path d="M30 5 L30 2M30 23 L30 26M39 14 L42 14M21 14 L18 14M36.4 8.6 L38.5 6.5M23.6 19.4 L21.5 21.5M36.4 19.4 L38.5 21.5M23.6 8.6 L21.5 6.5" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
                 <rect x="6" y="20" width="28" height="14" rx="7" fill="white"/>

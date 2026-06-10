@@ -1,3 +1,4 @@
+(function () {
 // ── ÉTAT ─────────────────────────────────────────────────────────────────────
 
 let currentPoi = null;
@@ -29,7 +30,9 @@ function buildGallery(poi) {
                 : '<div class="slide-placeholder" style="background:' + img.grad + '">' + PHOTO_ICON + '</div>';
         track.appendChild(slide);
 
-        const dot = document.createElement('div');
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Média ' + (i + 1) + ' sur ' + poi.images.length);
         dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
         dot.addEventListener('click', function() { stopAuto(); goToSlide(i); });
         dots.appendChild(dot);
@@ -176,4 +179,14 @@ function render() {
     startAuto();
 }
 
+// Réaligner la galerie quand la largeur change (rotation de l'écran)
+window.addEventListener('resize', function () {
+    if (!currentPoi) return;
+    const wrapper = document.getElementById('galleryWrapper');
+    const track   = document.getElementById('galleryTrack');
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(' + (-galleryIndex * wrapper.offsetWidth) + 'px)';
+});
+
 render();
+})();

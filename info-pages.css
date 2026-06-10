@@ -35,11 +35,7 @@ body {
     height: 20px;
 }
 
-/* ── Animation d'entrée commune ──────────────────────────────────────────── */
-@keyframes ipIn {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+/* Animations d'entrée : keyframe pageIn + tokens définis dans style.css */
 
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -103,15 +99,15 @@ body {
     overflow: hidden;
     padding: 22px 20px 22px 22px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    animation: ipIn 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
 }
 
-.ic-rule:nth-child(1) { animation-delay: 0.05s; }
-.ic-rule:nth-child(2) { animation-delay: 0.10s; }
-.ic-rule:nth-child(3) { animation-delay: 0.15s; }
-.ic-rule:nth-child(4) { animation-delay: 0.20s; }
-.ic-rule:nth-child(5) { animation-delay: 0.25s; }
-.ic-rule:nth-child(6) { animation-delay: 0.30s; }
+.ic-rule:nth-child(1) { animation-delay: calc(var(--stagger) * 1); }
+.ic-rule:nth-child(2) { animation-delay: calc(var(--stagger) * 2); }
+.ic-rule:nth-child(3) { animation-delay: calc(var(--stagger) * 3); }
+.ic-rule:nth-child(4) { animation-delay: calc(var(--stagger) * 4); }
+.ic-rule:nth-child(5) { animation-delay: calc(var(--stagger) * 5); }
+.ic-rule:nth-child(6) { animation-delay: calc(var(--stagger) * 6); }
 
 /* Barre d'accent gauche */
 .ic-rule::before {
@@ -190,13 +186,13 @@ body {
     text-decoration: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    animation: ipIn 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
 }
 
-.ia-tile:nth-child(1) { animation-delay: 0.03s; }
-.ia-tile:nth-child(2) { animation-delay: 0.09s; }
-.ia-tile:nth-child(3) { animation-delay: 0.15s; }
-.ia-tile:nth-child(4) { animation-delay: 0.21s; }
+.ia-tile:nth-child(1) { animation-delay: calc(var(--stagger) * 1); }
+.ia-tile:nth-child(2) { animation-delay: calc(var(--stagger) * 2); }
+.ia-tile:nth-child(3) { animation-delay: calc(var(--stagger) * 3); }
+.ia-tile:nth-child(4) { animation-delay: calc(var(--stagger) * 4); }
 
 .ia-tile:active { filter: brightness(0.88); }
 
@@ -251,13 +247,13 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
-    animation: ipIn 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
 }
 
-.ia-contact:nth-of-type(1) { animation-delay: 0.28s; }
-.ia-contact:nth-of-type(2) { animation-delay: 0.34s; }
-.ia-contact:nth-of-type(3) { animation-delay: 0.40s; }
-.ia-contact:nth-of-type(4) { animation-delay: 0.46s; }
+.ia-contact:nth-of-type(1) { animation-delay: calc(var(--stagger) * 5); }
+.ia-contact:nth-of-type(2) { animation-delay: calc(var(--stagger) * 6); }
+.ia-contact:nth-of-type(3) { animation-delay: calc(var(--stagger) * 7); }
+.ia-contact:nth-of-type(4) { animation-delay: calc(var(--stagger) * 8); }
 
 .ia-contact:active { background: #f0f4f6; }
 
@@ -371,12 +367,12 @@ body {
     background: white;
     padding: 24px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    animation: ipIn 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
 }
 
-.iap-section:nth-child(1) { animation-delay: 0.06s; }
-.iap-section:nth-child(2) { animation-delay: 0.14s; }
-.iap-section:nth-child(3) { animation-delay: 0.22s; }
+.iap-section:nth-child(1) { animation-delay: calc(var(--stagger) * 1); }
+.iap-section:nth-child(2) { animation-delay: calc(var(--stagger) * 2); }
+.iap-section:nth-child(3) { animation-delay: calc(var(--stagger) * 3); }
 
 .iap-section-tag {
     font-family: 'Outfit', sans-serif;
@@ -454,8 +450,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 3px;
-    animation: ipIn 0.45s cubic-bezier(0.34, 1.1, 0.64, 1) both;
-    animation-delay: 0.30s;
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
+    animation-delay: calc(var(--stagger) * 4);
 }
 
 .iap-credits-line {

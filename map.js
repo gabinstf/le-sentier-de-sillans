@@ -29,6 +29,11 @@
   let currentBannerPoiId = null;
   let bannerEverShown = false;
 
+  function getValidated() {
+    try { return JSON.parse(localStorage.getItem('validatedPois') || '[]'); }
+    catch (e) { return []; }
+  }
+
   function fillBannerContent(id) {
     const poi = SILLANS_POIS[id - 1];
     document.getElementById('poiBannerTitle').textContent = id + '. ' + poi.title;
@@ -36,8 +41,11 @@
     tmp.innerHTML = poi.description[0];
     document.getElementById('poiBannerDesc').textContent = tmp.textContent;
     const thumb = document.getElementById('poiBannerThumb');
-    const img0 = poi.images[0];
-    if (img0.src) {
+    // Première vraie image du POI (un <img src="….mp4"> ne s'affiche pas)
+    const img0 = poi.images.find(function (im) {
+      return im.src && im.type !== 'video';
+    }) || poi.images[0];
+    if (img0.src && img0.type !== 'video') {
       thumb.innerHTML = '<img src="' + img0.src + '" alt="' + img0.alt + '">';
       thumb.style.background = '';
     } else {
@@ -48,7 +56,7 @@
       localStorage.setItem('lastPoiId', id);
       window.goTo('interet.html?id=' + id);
     };
-    const validated = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+    const validated = getValidated();
     const btnVal = document.getElementById('btnPoiValider');
     const isValidated = validated.includes(id);
     btnVal.textContent = isValidated ? 'Étape validée ✓' : "VALIDER L'ÉTAPE";
@@ -56,7 +64,7 @@
     btnVal.onclick = isValidated ? function () {
       showConfirmModal(id);
     } : function () {
-      const v = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+      const v = getValidated();
       if (!v.includes(id)) { v.push(id); localStorage.setItem('validatedPois', JSON.stringify(v)); }
       fillBannerContent(id);
       updatePoiStates();
@@ -69,7 +77,7 @@
     overlay.classList.add('visible');
 
     document.getElementById('confirmOk').onclick = function () {
-      let v = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+      let v = getValidated();
       v = v.filter(function (pid) { return pid < id; });
       localStorage.setItem('validatedPois', JSON.stringify(v));
       overlay.classList.remove('visible');
@@ -102,10 +110,9 @@
       inner.classList.remove('from-right', 'from-left');
       void inner.offsetWidth;
       inner.classList.add(dir);
-      inner.addEventListener('animationend', function h() {
+      inner.addEventListener('animationend', function () {
         inner.classList.remove('from-right', 'from-left');
-        inner.removeEventListener('animationend', h);
-      });
+      }, { once: true });
     }
     currentBannerPoiId = id;
     localStorage.setItem('lastPoiId', id);
@@ -194,7 +201,7 @@
   }
 
   function updatePoiStates() {
-    const validated = JSON.parse(localStorage.getItem('validatedPois') || '[]');
+    const validated = getValidated();
     let nextId = null;
     for (var n = 1; n <= MAP_COORDS.length; n++) {
       if (!validated.includes(n)) { nextId = n; break; }
@@ -300,6 +307,7 @@
   }
 
   window.addEventListener('resize', function () {
+    if (!img.naturalHeight) return; // carte pas encore chargée
     const newMin = container.clientHeight / img.naturalHeight;
     if (scale <= minScale) { scale = newMin; targetScale = newMin; }
     minScale = newMin;
