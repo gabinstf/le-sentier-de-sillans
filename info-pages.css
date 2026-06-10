@@ -50,7 +50,7 @@ body {
 .ic-hero {
     position: relative;
     background: linear-gradient(150deg, #0c4a24 0%, #1a6b3a 60%, #228b4a 100%);
-    padding: 48px 24px 36px;
+    padding: 64px 24px 36px;
     overflow: hidden;
 }
 
