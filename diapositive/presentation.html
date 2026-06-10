@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Sentier de Sillans</title>
+<style>
+@font-face {
+  font-family: 'Marky';
+  src: url('../fonts/marky.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('../fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#03658C; --s:#48ADCC; --bg:#F2F2F2; --dk:#2a3540;
+  --w:#fff; --r:#E84F4F;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --T:.65s;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:#111;font-family:'Outfit',sans-serif;cursor:none}
+
+/* ── CURSOR ─────────────────────────────── */
+#cur{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--s);
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,opacity .2s;mix-blend-mode:exclusion}
+#cur.big{width:28px;height:28px;opacity:.5}
+
+/* ── STAGE ───────────────────────────────── */
+#stage{position:relative;width:100vw;height:100vh;overflow:hidden}
+
+/* ── SLIDES ──────────────────────────────── */
+.sl{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:56px 72px;
+  opacity:0;pointer-events:none;z-index:1;
+  will-change:transform,opacity,clip-path;
+}
+.sl.on{opacity:1;pointer-events:all;z-index:3}
+.sl.out{z-index:2;pointer-events:none}
+
+/* ── TRANSITION CLASSES ──────────────────── */
+.in-fade  {animation:iFade var(--T) var(--ease) both}
+.out-fade {animation:oFade var(--T) var(--ease) both}
+@keyframes iFade{from{opacity:0}to{opacity:1}}
+@keyframes oFade{from{opacity:1}to{opacity:0}}
+
+.in-left  {animation:iLeft var(--T) var(--ease) both}
+.out-left {animation:oLeft var(--T) var(--ease) both}
+@keyframes iLeft{from{transform:translateX(100%)}to{transform:none}}
+@keyframes oLeft{from{transform:none}to{transform:translateX(-100%)}}
+
+.in-right  {animation:iRight var(--T) var(--ease) both}
+.out-right {animation:oRight var(--T) var(--ease) both}
+@keyframes iRight{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes oRight{from{transform:none}to{transform:translateX(100%)}}
+
+.in-up  {animation:iUp var(--T) var(--ease) both}
+.out-up {animation:oUp var(--T) var(--ease) both}
+@keyframes iUp{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+@keyframes oUp{from{transform:none;opacity:1}to{transform:translateY(-60px);opacity:0}}
+
+.in-scale  {animation:iScale var(--T) var(--ease) both}
+.out-scale {animation:oScale var(--T) var(--ease) both}
+@keyframes iScale{from{transform:scale(1.12);opacity:0}to{transform:none;opacity:1}}
+@keyframes oScale{from{transform:none;opacity:1}to{transform:scale(.88);opacity:0}}
+
+.in-circle  {animation:iCircle var(--T) var(--ease) both}
+.out-circle {animation:oCircle var(--T) var(--ease) both}
+@keyframes iCircle{from{clip-path:circle(0% at 50% 50%)}to{clip-path:circle(150% at 50% 50%)}}
+@keyframes oCircle{from{clip-path:circle(150% at 50% 50%)}to{clip-path:circle(0% at 50% 50%)}}
+
+.in-wipe  {animation:iWipe var(--T) var(--ease) both}
+.out-wipe {animation:oWipe var(--T) var(--ease) both}
+@keyframes iWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes oWipe{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 0 100%)}}
+
+/* ── PROGRESS ────────────────────────────── */
+#prog{position:fixed;bottom:0;left:0;height:2px;background:var(--s);z-index:100;transition:width .5s var(--ease)}
+#ctr{position:fixed;bottom:14px;right:20px;font-size:10px;font-weight:300;color:rgba(255,255,255,.3);letter-spacing:.12em;z-index:100}
+
+/* ── CONTENT ENTRANCE ────────────────────── */
+.sl.on [data-in]{animation:iUp .6s var(--ease) both}
+.sl.on [data-in="1"]{animation-delay:.05s}
+.sl.on [data-in="2"]{animation-delay:.15s}
+.sl.on [data-in="3"]{animation-delay:.25s}
+.sl.on [data-in="4"]{animation-delay:.35s}
+.sl.on [data-in="5"]{animation-delay:.45s}
+.sl.on [data-in="6"]{animation-delay:.55s}
+
+/* ── SLIDE 1 — COVER ── */
+#s1{background:var(--p);overflow:hidden}
+#s1 .glow{position:absolute;right:-10%;top:-20%;width:60vw;height:60vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(72,173,204,.18),transparent 70%);pointer-events:none}
+#s1 .glow2{position:absolute;left:-5%;bottom:-10%;width:35vw;height:35vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(72,173,204,.10),transparent 70%);pointer-events:none}
+.cover-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;max-width:860px;width:100%}
+#s1 h1{font-family:'Marky',sans-serif;font-size:clamp(52px,7.5vw,108px);line-height:.95;color:#fff;margin-bottom:20px}
+#s1 h1 em{color:var(--s);font-style:normal;display:block}
+.cover-sub{font-size:16px;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;margin-bottom:44px;font-weight:300}
+.team{display:flex;flex-wrap:wrap;gap:10px}
+.team span{border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:6px 18px;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.trail{position:absolute;bottom:36px;left:72px;display:flex;gap:10px;align-items:center}
+.td{width:7px;height:7px;border-radius:50%;background:var(--s)}
+.td:nth-child(1){animation:tp 2s .0s ease-in-out infinite}
+.td:nth-child(2){animation:tp 2s .2s ease-in-out infinite}
+.td:nth-child(3){animation:tp 2s .4s ease-in-out infinite}
+.td:nth-child(4){animation:tp 2s .6s ease-in-out infinite}
+.td:nth-child(5){animation:tp 2s .8s ease-in-out infinite}
+.td:nth-child(6){animation:tp 2s 1.0s ease-in-out infinite}
+.td:nth-child(7){animation:tp 2s 1.2s ease-in-out infinite}
+.td:nth-child(8){animation:tp 2s 1.4s ease-in-out infinite}
+@keyframes tp{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.5)}}
+#s1 .vl{position:absolute;right:72px;top:50%;transform:translateY(-50%);width:110px;opacity:.85}
+
+/* ── SLIDE 2 — CONTEXTE ── */
+#s2{background:#1a2830}
+#s2::before{content:'';position:absolute;left:0;top:0;width:50%;height:100%;
+  background:url('../images/photo_cascade.png') center/cover no-repeat;
+  opacity:.25;mask-image:linear-gradient(90deg,rgba(0,0,0,.8),transparent)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;max-width:1100px;position:relative;z-index:1}
+.stat-blk{padding:40px 44px;display:flex;flex-direction:column;gap:8px}
+.stat-blk:nth-child(1){background:rgba(3,101,140,.35);border-radius:20px 0 0 0}
+.stat-blk:nth-child(2){background:rgba(72,173,204,.18);border-radius:0 20px 0 0}
+.stat-blk:nth-child(3){background:rgba(72,173,204,.12);border-radius:0 0 0 20px}
+.stat-blk:nth-child(4){background:rgba(3,101,140,.22);border-radius:0 0 20px 0}
+.stat-n{font-family:'Marky',sans-serif;font-size:clamp(48px,6vw,88px);color:#fff;line-height:1}
+.stat-n em{color:var(--s);font-style:normal}
+.stat-l{font-size:14px;color:rgba(255,255,255,.5);font-weight:400;letter-spacing:.06em}
+
+/* ── SLIDE 3 — PROBLÉMATIQUE ── */
+#s3{background:#1a2830;flex-direction:row;gap:0}
+.pb-side{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:72px 56px;position:relative}
+.pb-left{background:rgba(232,79,79,.07);border-right:1px solid rgba(232,79,79,.2)}
+.pb-right{background:rgba(72,173,204,.07);border-left:1px solid rgba(72,173,204,.2)}
+.pb-icon{line-height:1;filter:grayscale(.3)}
+.pb-title{font-family:'Marky',sans-serif;font-size:clamp(24px,2.8vw,40px);color:#fff;text-align:center}
+.pb-left .pb-title{color:#E84F4F}
+.pb-right .pb-title{color:var(--s)}
+.pb-tags{display:flex;flex-direction:column;gap:8px;align-items:center}
+.pb-tag{font-size:13px;color:rgba(255,255,255,.5);background:rgba(255,255,255,.05);
+  border-radius:8px;padding:6px 14px}
+.pb-vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;background:#1a2830;border:2px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Marky',sans-serif;font-size:18px;color:rgba(255,255,255,.4);z-index:10}
+
+/* ── SLIDE 4 — MISSION ── */
+#s4{background:var(--dk)}
+#s4 .tag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px;align-self:flex-start}
+#s4 h2{font-family:'Marky',sans-serif;font-size:clamp(30px,3.5vw,52px);color:#fff;align-self:flex-start;margin-bottom:40px}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;max-width:1100px}
+.m-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:28px 24px;display:flex;gap:20px;align-items:center}
+.m-num{font-family:'Marky',sans-serif;font-size:52px;color:var(--s);opacity:.35;line-height:1;flex-shrink:0;width:52px}
+.m-ico{flex-shrink:0;opacity:.85}
+.m-txt strong{display:block;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+.m-txt span{font-size:13px;color:rgba(255,255,255,.45)}
+
+/* ── SLIDE 5 — CONCEPT ── */
+#s5{background:#111c24;overflow:hidden}
+.concept-wrap{display:flex;align-items:stretch;gap:2px;width:100%;max-width:1200px;height:380px}
+.c-box{flex:1;border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;
+  justify-content:flex-end;position:relative;overflow:hidden}
+.c-box.c-before{background:rgba(232,79,79,.08);border:1px solid rgba(232,79,79,.2)}
+.c-box.c-after {background:rgba(72,173,204,.10);border:1px solid rgba(72,173,204,.3)}
+.c-box-img{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.18}
+.c-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.c-before .c-label{color:#E84F4F}
+.c-after  .c-label{color:var(--s)}
+.c-title{font-family:'Marky',sans-serif;font-size:clamp(22px,2.5vw,36px);color:#fff;margin-bottom:8px}
+.c-desc{font-size:14px;color:rgba(255,255,255,.5);max-width:340px}
+.c-icon-big{position:absolute;top:36px;left:36px;opacity:.6}
+.c-arrow{width:64px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--s)}
+.c-pillars{display:flex;gap:12px;width:100%;max-width:1200px;margin-top:16px}
+.c-pill{flex:1;background:rgba(72,173,204,.08);border:1px solid rgba(72,173,204,.2);
+  border-radius:12px;padding:14px 16px;display:flex;gap:12px;align-items:center}
+.c-pill-n{font-family:'Marky',sans-serif;font-size:28px;color:var(--s);opacity:.5;line-height:1;flex-shrink:0}
+.c-pill-t{font-size:13px;font-weight:700;color:#fff}
+
+/* ── SLIDE 6 — COULEURS ── */
+#s6{background:#0d1a22;flex-direction:row;padding:0;overflow:hidden}
+.col-strip{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:32px 28px;position:relative;cursor:default;
+  transition:flex .4s var(--ease)}
+.col-strip:hover{flex:2}
+.cs-1{background:#03658C}
+.cs-2{background:#48ADCC}
+.cs-3{background:#F2F2F2}
+.cs-4{background:#2a3540}
+.cs-5{background:linear-gradient(160deg,#48ADCC,#03658C)}
+.col-hex{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;
+  letter-spacing:.06em;margin-bottom:6px}
+.cs-3 .col-hex{color:var(--dk)}
+.cs-3 .col-name{color:rgba(0,0,0,.45)}
+.cs-3 .col-role{color:rgba(0,0,0,.3)}
+.col-hex,.col-name,.col-role{color:#fff}
+.col-name{font-size:14px;font-weight:600;margin-bottom:4px}
+.col-role{font-size:11px;opacity:.55;line-height:1.5}
+.col-swatch-line{position:absolute;top:32px;left:28px;width:40px;height:3px;
+  border-radius:2px;background:rgba(255,255,255,.3)}
+.cs-3 .col-swatch-line{background:rgba(0,0,0,.2)}
+
+/* ── SLIDE 7 — TYPOGRAPHIES ── */
+#s7{background:var(--dk);flex-direction:row;gap:2px;padding:0;overflow:hidden}
+.ty-col{flex:1;height:100%;padding:52px 44px;display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden}
+.ty-col:nth-child(1){background:rgba(3,101,140,.25)}
+.ty-col:nth-child(2){background:rgba(72,173,204,.15)}
+.ty-col:nth-child(3){background:rgba(255,255,255,.04)}
+.ty-big{position:absolute;top:20px;left:28px;font-size:clamp(100px,14vw,200px);
+  line-height:1;opacity:.08;pointer-events:none;color:#fff;white-space:nowrap}
+.ty-big.marky{font-family:'Marky',sans-serif}
+.ty-big.outfit-b{font-family:'Outfit',sans-serif;font-weight:700}
+.ty-big.outfit{font-family:'Outfit',sans-serif;font-weight:400}
+.ty-role{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:12px}
+.ty-name{font-family:'Marky',sans-serif;font-size:clamp(22px,2.5vw,36px);color:#fff;margin-bottom:8px}
+.ty-sample{font-size:28px;color:#fff;margin-bottom:14px;line-height:1.2}
+.ty-sample.m{font-family:'Marky',sans-serif}
+.ty-sample.ob{font-family:'Outfit',sans-serif;font-weight:700}
+.ty-sample.or{font-family:'Outfit',sans-serif;font-weight:400}
+.ty-usage{font-size:12px;color:rgba(255,255,255,.45);line-height:1.5}
+
+/* ── SLIDE 8 — LOGO ── */
+#s8{background:#0d1a22}
+#s8 .tag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px;align-self:flex-start}
+#s8 h2{font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;align-self:flex-start;margin-bottom:32px}
+.logo-row{display:flex;gap:20px;width:100%;max-width:1100px;align-items:stretch}
+.lv{flex:1;border-radius:20px;padding:36px 24px;display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center;min-height:200px;justify-content:center}
+.lv.dark{background:#03658C}
+.lv.light{background:#F2F2F2}
+.lv.grad{background:linear-gradient(160deg,#48ADCC,#03658C)}
+.lv img{width:100%;max-width:160px}
+.lv-title{font-size:13px;font-weight:700;letter-spacing:.08em}
+.lv.dark .lv-title,.lv.grad .lv-title{color:rgba(255,255,255,.8)}
+.lv.light .lv-title{color:var(--p)}
+.lv-desc{font-size:11px;line-height:1.5}
+.lv.dark .lv-desc,.lv.grad .lv-desc{color:rgba(255,255,255,.45)}
+.lv.light .lv-desc{color:rgba(0,0,0,.4)}
+.logo-note{margin-top:20px;max-width:900px;background:rgba(72,173,204,.08);border:1px solid rgba(72,173,204,.2);
+  border-radius:14px;padding:16px 24px;text-align:center;font-size:14px;color:rgba(255,255,255,.55)}
+.logo-note strong{color:var(--s)}
+
+/* ── SLIDE 9 — PARCOURS ── */
+#s9{background:linear-gradient(135deg,var(--p) 0%,#1a3a4a 100%)}
+#s9 .tag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px;align-self:flex-start}
+#s9 h2{font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;align-self:flex-start;margin-bottom:36px}
+.journey{display:flex;align-items:flex-start;gap:0;width:100%;max-width:1200px;position:relative}
+.journey::before{content:'';position:absolute;top:22px;left:24px;right:24px;height:2px;
+  background:linear-gradient(90deg,var(--s),rgba(72,173,204,.2));z-index:0}
+.jstep{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;z-index:1;min-width:0}
+.jb{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);
+  border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.jb.hi{background:var(--s);border-color:#fff}
+.jname{font-weight:700;font-size:12px;color:#fff;text-align:center;line-height:1.3}
+.jdesc{font-size:10px;color:rgba(255,255,255,.45);text-align:center;line-height:1.4;padding:0 2px}
+.jchip{background:rgba(72,173,204,.2);border:1px solid rgba(72,173,204,.4);border-radius:6px;
+  padding:3px 8px;font-size:9px;color:var(--s);font-weight:600;margin-top:2px}
+
+/* ── PHONE PERSIST ── */
+#phone-persist{
+  position:fixed;right:120px;top:50%;transform:translateY(-50%);
+  width:220px;z-index:50;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s var(--ease),right .6s var(--ease);
+}
+#phone-persist.show{opacity:1;pointer-events:all}
+.pf{width:220px;height:460px;background:#111;border-radius:40px;
+  border:8px solid #252525;box-shadow:0 40px 80px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.06);
+  overflow:hidden;position:relative}
+.pscr{width:100%;height:100%;border-radius:32px;overflow:hidden;font-size:9px;position:relative}
+
+/* phone UI atoms */
+.p-sb{height:22px;background:var(--p);display:flex;align-items:center;
+  justify-content:space-between;padding:0 14px;font-size:8px;font-weight:600;color:#fff}
+.p-hd{height:34px;background:var(--p);border-bottom:1.5px solid var(--s);
+  display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.p-wx{font-size:7.5px;color:rgba(255,255,255,.65)}
+.p-ft{height:40px;background:var(--bg);border-top:1.5px solid var(--s);
+  display:flex;align-items:center;justify-content:space-around;
+  position:absolute;bottom:0;left:0;right:0}
+.p-nb{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:7px;color:var(--p);font-weight:600}
+.p-nb.act{color:var(--s)}
+.p-map-area{height:calc(100% - 98px);position:relative;overflow:hidden}
+.p-map-area img{width:100%;height:100%;object-fit:cover;opacity:.85}
+.p-marker{position:absolute;width:18px;height:18px;border-radius:50%;
+  background:#fff;border:2px solid var(--p);display:flex;align-items:center;
+  justify-content:center;font-size:7px;font-weight:700;color:var(--p);
+  box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.p-marker.done{background:var(--p);color:#fff}
+.p-marker.nxt{background:var(--s);border-color:#fff;color:#fff;
+  animation:mglow 1.2s ease-in-out infinite alternate}
+@keyframes mglow{from{box-shadow:0 2px 6px rgba(0,0,0,.3)}to{box-shadow:0 0 14px rgba(72,173,204,.9)}}
+.p-banner{position:absolute;bottom:8px;left:8px;right:8px;background:var(--bg);
+  border-radius:10px;padding:7px;display:flex;gap:8px;
+  box-shadow:0 4px 16px rgba(0,0,0,.35)}
+.p-thumb{width:38px;height:38px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.p-bi{flex:1;min-width:0}
+.p-bs{font-size:7px;color:var(--s);font-weight:700}
+.p-bn{font-size:9px;font-weight:700;color:var(--dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-bd{font-size:7px;color:rgba(0,0,0,.4);margin:1px 0}
+.p-bbs{display:flex;gap:4px;margin-top:3px}
+.p-bb{font-size:7px;padding:3px 7px;border-radius:5px;font-weight:600}
+.p-bb.a{background:var(--s);color:#fff}
+.p-bb.b{background:var(--p);color:#fff}
+.p-proh{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px}
+.p-pi{background:#fff;border-radius:8px;padding:4px 8px;display:flex;align-items:center;
+  gap:5px;font-size:7px;color:var(--dk);font-weight:600;
+  box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* poi screen */
+.poi-screen{display:flex;flex-direction:column;height:calc(100% - 96px)}
+.p-gal{height:105px;background:var(--dk);position:relative;overflow:hidden;flex-shrink:0}
+.p-gal img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.p-galc{position:absolute;bottom:5px;right:7px;background:rgba(0,0,0,.5);
+  border-radius:3px;padding:1px 5px;font-size:7px;color:#fff}
+.poi-body{flex:1;background:var(--bg);padding:10px;overflow:hidden}
+.poi-step{font-size:7px;color:var(--s);font-weight:700;margin-bottom:3px}
+.poi-title{font-family:'Marky',sans-serif;font-size:14px;color:var(--dk);margin-bottom:5px}
+.poi-txt{font-size:7.5px;color:rgba(0,0,0,.6);line-height:1.5;margin-bottom:8px}
+.poi-cta{background:var(--p);color:#fff;border-radius:7px;padding:7px;
+  text-align:center;font-size:7.5px;font-weight:700;letter-spacing:.05em}
+
+/* validation modal */
+.p-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);
+  display:flex;align-items:center;justify-content:center;padding:16px;z-index:20}
+.p-modal{background:#fff;border-radius:14px;padding:16px;width:100%;text-align:center}
+.p-mt{font-weight:700;font-size:10px;color:var(--dk);margin-bottom:4px}
+.p-mx{font-size:7.5px;color:rgba(0,0,0,.45);line-height:1.4;margin-bottom:10px}
+.p-mbs{display:flex;gap:6px}
+.p-mb{flex:1;border-radius:8px;padding:7px 4px;font-size:7.5px;font-weight:700}
+.p-mb.ca{background:var(--bg);color:var(--dk)}
+.p-mb.co{background:var(--p);color:#fff}
+
+/* screen switcher */
+#phone-persist .pscr[data-pscreen]{display:none}
+#phone-persist .pscr.pactive{display:block}
+.pscr.pin-left  {animation:iLeft .4s var(--ease) both}
+.pscr.pin-right {animation:iRight .4s var(--ease) both}
+.pscr.pout-left {animation:oLeft .4s var(--ease) both}
+.pscr.pout-right{animation:oRight .4s var(--ease) both}
+
+/* Phone slides layout */
+.phone-sl{flex-direction:row;align-items:center;justify-content:flex-start;gap:0}
+.phone-sl .pl-info{flex:1;max-width:520px;padding-right:20px}
+.phone-sl .pl-info .ptag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:14px}
+.phone-sl .pl-info h2{font-family:'Marky',sans-serif;font-size:clamp(28px,3.2vw,46px);color:#fff;margin-bottom:24px;line-height:1.1}
+.uxp{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.uxd{width:7px;height:7px;border-radius:50%;background:var(--s);margin-top:5px;flex-shrink:0}
+.uxt strong{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.uxt span{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4}
+
+#s10{background:#1a2830}
+#s11{background:#1a2830}
+#s12{background:#1a2830}
+
+/* ── SLIDE 13 — UX ── */
+#s13{background:var(--dk)}
+#s13 .tag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px;align-self:flex-start}
+#s13 h2{font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;align-self:flex-start;margin-bottom:32px}
+.ux-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;max-width:1100px}
+.ux-c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:22px 20px;display:flex;gap:14px;align-items:flex-start}
+.ux-ico{flex-shrink:0}
+.ux-ct strong{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.ux-ct span{font-size:12px;color:rgba(255,255,255,.45);line-height:1.4}
+.ux-badge{display:inline-block;margin-top:8px;font-size:9px;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--s);background:rgba(72,173,204,.1);
+  border:1px solid rgba(72,173,204,.25);border-radius:5px;padding:2px 7px}
+
+/* ── SLIDE 14 — TECHNOLOGIES ── */
+#s14{background:#0d1a22;flex-direction:row;gap:0;padding:0;overflow:hidden}
+.tech-left{flex:1;padding:72px 60px;display:flex;flex-direction:column;justify-content:center}
+.tech-left .tag{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px}
+.tech-left h2{font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,52px);color:#fff;margin-bottom:32px}
+.tech-list{display:flex;flex-direction:column;gap:12px}
+.tl{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);
+  border-radius:14px;padding:16px 20px}
+.tl-ico{flex-shrink:0}
+.tl-t strong{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.tl-t span{font-size:12px;color:rgba(255,255,255,.4)}
+.tech-right{width:320px;flex-shrink:0;background:rgba(72,173,204,.06);
+  border-left:1px solid rgba(72,173,204,.15);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:24px;padding:40px 32px}
+.pwa-badge{background:var(--p);border-radius:100px;padding:12px 28px;
+  font-size:15px;font-weight:700;color:#fff;letter-spacing:.06em;
+  box-shadow:0 8px 32px rgba(3,101,140,.5)}
+.pwa-feats{display:flex;flex-direction:column;gap:10px;width:100%}
+.pf-row{display:flex;align-items:center;gap:12px;padding:10px 14px;
+  background:rgba(255,255,255,.05);border-radius:10px}
+.pf-ico{flex-shrink:0}
+.pf-t{font-size:13px;font-weight:600;color:#fff}
+.pf-d{font-size:11px;color:rgba(255,255,255,.4)}
+
+/* ── SLIDE 15 — CONCLUSION ── */
+#s15{background:var(--p);overflow:hidden}
+#s15 .glow{position:absolute;right:-10%;top:-20%;width:60vw;height:60vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(72,173,204,.18),transparent 70%);pointer-events:none}
+#s15 .glow2{position:absolute;left:-5%;bottom:-10%;width:40vw;height:40vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(72,173,204,.1),transparent 70%);pointer-events:none}
+#s15 .inner{position:relative;z-index:1;text-align:center;max-width:760px}
+#s15 img.clogo{width:72px;margin-bottom:28px;filter:brightness(0) invert(1) opacity(.5)}
+#s15 h1{font-family:'Marky',sans-serif;font-size:clamp(40px,5.5vw,80px);color:#fff;margin-bottom:20px;line-height:1}
+#s15 .sub{font-size:18px;color:rgba(255,255,255,.55);margin-bottom:36px;font-weight:300}
+.val-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
+.val-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:100px;padding:9px 22px;font-size:13px;font-weight:600;color:#fff}
+.end-cta{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.18em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="prog"></div>
+<div id="ctr">1 / 15</div>
+
+<!-- Persistent phone (shown during slides 10-12) -->
+<div id="phone-persist">
+  <div class="pf">
+
+    <!-- Screen A: Accueil -->
+    <div class="pscr pactive" data-pscreen="accueil">
+      <div class="p-sb"><span>9:41</span><span>●●●</span></div>
+      <div style="position:relative;height:calc(100% - 22px);overflow:hidden;background:#02223a">
+        <img src="../images/fond cascade accueil données.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55">
+        <div style="position:absolute;inset:0;background:rgba(2,28,50,.52)"></div>
+        <div style="position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;padding:10px 12px">
+          <img src="../images/logo.svg" style="height:34px;width:auto;filter:brightness(0) invert(1);margin-top:8px;margin-bottom:8px">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center">
+            <p style="font-size:7.5px;font-weight:400;color:#fff;opacity:.92;line-height:1.4">Rappel : aucune connexion sur le sentier</p>
+            <p style="font-size:6.5px;color:rgba(255,255,255,.7);line-height:1.5">Pour profiter d'une expérience en temps réel, veuillez télécharger les données en amont.</p>
+            <div style="display:flex;gap:5px;width:100%;margin-top:8px">
+              <div style="flex:1;background:#fff;padding:7px 4px;text-align:center;font-size:7px;font-weight:700;color:#03658C;font-family:'Marky',sans-serif">D'ACCORD</div>
+              <div style="flex:1;background:transparent;border:1px solid rgba(255,255,255,.5);padding:7px 4px;text-align:center;font-size:7px;color:#fff;font-family:'Marky',sans-serif">NON MERCI</div>
+            </div>
+          </div>
+          <img src="../images/logo dpt du var blanc.png" style="height:20px;width:auto;filter:brightness(0) invert(1);opacity:.75;margin-bottom:8px">
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen B: Carte -->
+    <div class="pscr" data-pscreen="carte">
+      <div class="p-sb"><span>9:41</span><span>●●●</span></div>
+      <div class="p-hd">
+        <img src="../images/logo.svg" style="height:14px;filter:brightness(0) invert(1)">
+        <div class="p-wx">Couvert · 25°C</div>
+      </div>
+      <div class="p-map-area">
+        <img src="../images/carte.png">
+        <div class="p-marker done" style="top:28%;left:18%">✓</div>
+        <div class="p-marker done" style="top:37%;left:29%">✓</div>
+        <div class="p-marker nxt" style="top:44%;left:41%">3</div>
+        <div class="p-marker" style="top:52%;left:54%">4</div>
+        <div class="p-marker" style="top:43%;left:64%">5</div>
+        <div class="p-marker" style="top:55%;left:72%">6</div>
+        <div class="p-proh">
+          <div class="p-pi"><img src="../images/baignade interdite.png" style="width:12px;height:12px;object-fit:contain"> Baignade</div>
+          <div class="p-pi"><img src="../images/cigarette interdiction.png" style="width:12px;height:12px;object-fit:contain"> Fumer</div>
+        </div>
+        <div class="p-banner">
+          <img class="p-thumb" src="../images/photo_cascade.png">
+          <div class="p-bi">
+            <div class="p-bs">Étape 3 / 10</div>
+            <div class="p-bn">Le Tuff calcaire</div>
+            <div class="p-bd">0,8 km · ~15 min</div>
+            <div class="p-bbs">
+              <div class="p-bb a">En savoir +</div>
+              <div class="p-bb b">Valider</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-ft">
+        <div class="p-nb">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#1a6b8a" stroke-width="2"/><path d="M12 11L12 17" stroke="#1a6b8a" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#1a6b8a"/></svg>
+          <span>Info</span>
+        </div>
+        <div class="p-nb act">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/><circle cx="12" cy="9" r="2.5" fill="#1a6b8a"/></svg>
+          <span>Carte</span>
+        </div>
+        <div class="p-nb">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="13" width="3.5" height="7" rx="1" fill="#1a6b8a"/><rect x="10.25" y="8" width="3.5" height="12" rx="1" fill="#1a6b8a"/><rect x="16.5" y="4" width="3.5" height="16" rx="1" fill="#1a6b8a"/></svg>
+          <span>Stats</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen C: POI + Validation -->
+    <div class="pscr" data-pscreen="poi">
+      <div class="p-sb"><span>9:41</span><span>●●●</span></div>
+      <div class="p-hd">
+        <img src="../images/logo.svg" style="height:14px;filter:brightness(0) invert(1)">
+        <div class="p-wx">Couvert · 25°C</div>
+      </div>
+      <div class="poi-screen">
+        <div class="p-gal">
+          <img src="../images/photo_cascade.png">
+          <div class="p-galc">1 / 2</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 10px;background:var(--bg);border-bottom:1px solid rgba(0,0,0,.08);flex-shrink:0">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#48ADCC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="font-size:7px;font-weight:700;color:var(--dk)">6 / 10</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#48ADCC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="poi-body">
+          <div class="poi-step">Étape 6 / 10 · 1,5 km</div>
+          <div class="poi-title">Le Belvédère</div>
+          <div class="poi-txt">La cascade de 42m se révèle dans toute sa splendeur. L'eau turquoise façonne les travertins de la Bresque.</div>
+          <div class="poi-cta">VALIDER L'ÉTAPE</div>
+        </div>
+        <div class="p-overlay">
+          <div class="p-modal">
+            <svg width="22" height="22" viewBox="0 0 24 24" style="margin-bottom:6px;display:block;margin-left:auto;margin-right:auto"><circle cx="12" cy="12" r="10" fill="#03658C"/><polyline points="7,12 11,16 17,8" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="p-mt">Valider cette étape ?</div>
+            <div class="p-mx">Cette action débloque le prochain point d'intérêt.</div>
+            <div class="p-mbs">
+              <div class="p-mb ca">Annuler</div>
+              <div class="p-mb co">Confirmer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-ft">
+        <div class="p-nb">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#1a6b8a" stroke-width="2"/><path d="M12 11L12 17" stroke="#1a6b8a" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#1a6b8a"/></svg>
+          <span>Info</span>
+        </div>
+        <div class="p-nb act">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="white"/><circle cx="12" cy="9" r="2.5" fill="#1a6b8a"/></svg>
+          <span>Carte</span>
+        </div>
+        <div class="p-nb">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="4" y="13" width="3.5" height="7" rx="1" fill="#1a6b8a"/><rect x="10.25" y="8" width="3.5" height="12" rx="1" fill="#1a6b8a"/><rect x="16.5" y="4" width="3.5" height="16" rx="1" fill="#1a6b8a"/></svg>
+          <span>Stats</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="stage">
+
+<!-- ═══ S1 : COVER ═══ -->
+<div class="sl on" id="s1">
+  <div class="glow"></div><div class="glow2"></div>
+  <div class="cover-inner">
+    <div class="cover-sub" data-in="1">Département du Var · SAÉ 401</div>
+    <h1 data-in="2">Le Sentier<br><em>de Sillans</em></h1>
+    <div class="team" data-in="3">
+      <span>Axel Bureau</span><span>Angelito Gotti</span>
+      <span>Clément Hanot</span><span>Gabin Stiff Tartereau</span>
+    </div>
+  </div>
+  <img class="vl" src="../images/logo dpt du var blanc.png">
+  <div class="trail">
+    <div class="td"></div><div class="td"></div><div class="td"></div><div class="td"></div>
+    <div class="td"></div><div class="td"></div><div class="td"></div><div class="td"></div>
+  </div>
+</div>
+
+<!-- ═══ S2 : CONTEXTE ═══ -->
+<div class="sl" id="s2">
+  <div class="stats-grid">
+    <div class="stat-blk" data-in="1"><div class="stat-n">369<em>ha</em></div><div class="stat-l">Espace Naturel Sensible</div></div>
+    <div class="stat-blk" data-in="2"><div class="stat-n">42<em>m</em></div><div class="stat-l">Hauteur de la cascade</div></div>
+    <div class="stat-blk" data-in="3"><div class="stat-n">1,3<em>M€</em></div><div class="stat-l">Investissement aménagement</div></div>
+    <div class="stat-blk" data-in="4"><div class="stat-n">10<em>POI</em></div><div class="stat-l">Points d'intérêt · 3,3 km</div></div>
+  </div>
+</div>
+
+<!-- ═══ S3 : PROBLÉMATIQUE ═══ -->
+<div class="sl" id="s3">
+  <div class="pb-side pb-left" data-in="1">
+    <div class="pb-icon">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="rgba(232,79,79,.8)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    </div>
+    <div class="pb-title">Pression touristique</div>
+    <div class="pb-tags">
+      <div class="pb-tag">Stagnation aux zones critiques</div>
+      <div class="pb-tag">Consommation du paysage</div>
+      <div class="pb-tag">Dégradation des travertins</div>
+    </div>
+  </div>
+  <div class="pb-vs">vs</div>
+  <div class="pb-side pb-right" data-in="2">
+    <div class="pb-icon">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0120 13c0-1.5-.5-3-1.5-4.5C17 7 14 6 12 6c-2 0-5 1-6.5 2.5S4 11.5 4 13a7 7 0 007 7z"/><path d="M11 20L4.5 13.5"/></svg>
+    </div>
+    <div class="pb-title">Fragilité écologique</div>
+    <div class="pb-tags">
+      <div class="pb-tag">Écrevisse à pieds blancs</div>
+      <div class="pb-tag">Baignade &amp; feu interdits</div>
+      <div class="pb-tag">ENS protégé</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ S4 : MISSION ═══ -->
+<div class="sl" id="s4">
+  <div class="tag" data-in="1">La demande — Département du Var</div>
+  <h2 data-in="2">4 livrables</h2>
+  <div class="mission-grid">
+    <div class="m-card" data-in="3">
+      <div class="m-num">01</div>
+      <div class="m-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+      <div class="m-txt"><strong>Identité graphique</strong><span>Logo · charte · mascotte</span></div>
+    </div>
+    <div class="m-card" data-in="4">
+      <div class="m-num">02</div>
+      <div class="m-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 13"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/></svg></div>
+      <div class="m-txt"><strong>Communication</strong><span>Flyer · réseaux sociaux</span></div>
+    </div>
+    <div class="m-card" data-in="5">
+      <div class="m-num">03</div>
+      <div class="m-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg></div>
+      <div class="m-txt"><strong>Application PWA</strong><span>Carte GPS · médiation · offline</span></div>
+    </div>
+    <div class="m-card" data-in="6">
+      <div class="m-num">04</div>
+      <div class="m-ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.85)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88" fill="rgba(72,173,204,.3)"/></svg></div>
+      <div class="m-txt"><strong>Parcours narratif</strong><span>10 POI · 3,3 km · 1h30</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ S5 : CONCEPT ═══ -->
+<div class="sl" id="s5">
+  <div style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--s);margin-bottom:16px;align-self:flex-start" data-in="1">Notre concept</div>
+  <div class="concept-wrap" data-in="2">
+    <div class="c-box c-before">
+      <img class="c-box-img" src="../images/photo_cascade.png">
+      <div class="c-icon-big"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+      <div class="c-label c-before">Avant</div>
+      <div class="c-title">Le spot cascade</div>
+      <div class="c-desc">Un point de vue · une photo · passage rapide</div>
+    </div>
+    <div class="c-arrow">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--s)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </div>
+    <div class="c-box c-after">
+      <img class="c-box-img" src="../images/photo_cascade.png">
+      <div class="c-icon-big"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l3 3"/><path d="M8.5 9.5L6 15"/><path d="M15.5 9.5L18 15"/></svg></div>
+      <div class="c-label c-after">Après</div>
+      <div class="c-title">Le sentier vivant</div>
+      <div class="c-desc">1h30 · 10 POI · immersion narrative</div>
+    </div>
+  </div>
+  <div class="c-pillars" data-in="3">
+    <div class="c-pill"><div class="c-pill-n">01</div><div class="c-pill-t">Induire le mouvement</div></div>
+    <div class="c-pill"><div class="c-pill-n">02</div><div class="c-pill-t">Transformer le visiteur</div></div>
+    <div class="c-pill"><div class="c-pill-n">03</div><div class="c-pill-t">Légitimer les interdits</div></div>
+  </div>
+</div>
+
+<!-- ═══ S6 : COULEURS ═══ -->
+<div class="sl" id="s6" style="padding:0">
+  <div class="col-strip cs-1" data-in="1">
+    <div class="col-swatch-line"></div>
+    <div class="col-hex">#03658C</div>
+    <div class="col-name">Bleu Profond</div>
+    <div class="col-role">Socle · interface · header<br>Évoque la roche et les eaux souterraines</div>
+  </div>
+  <div class="col-strip cs-2" data-in="2">
+    <div class="col-swatch-line"></div>
+    <div class="col-hex">#48ADCC</div>
+    <div class="col-name">Bleu Turquoise</div>
+    <div class="col-role">Actions · highlights · trail<br>Les vasques turquoise de la Bresque</div>
+  </div>
+  <div class="col-strip cs-3" data-in="3">
+    <div class="col-swatch-line"></div>
+    <div class="col-hex" style="color:var(--dk)">#F2F2F2</div>
+    <div class="col-name" style="color:var(--dk)">Gris Clair</div>
+    <div class="col-role" style="color:rgba(0,0,0,.35)">Fond · lisibilité extérieur<br>Contraste optimal sous lumière forte</div>
+  </div>
+  <div class="col-strip cs-4" data-in="4">
+    <div class="col-swatch-line"></div>
+    <div class="col-hex">#2a3540</div>
+    <div class="col-name">Ardoise</div>
+    <div class="col-role">Textes · contrastes<br>La roche et le minéral</div>
+  </div>
+  <div class="col-strip cs-5" data-in="5">
+    <div class="col-swatch-line"></div>
+    <div class="col-hex">Dégradé</div>
+    <div class="col-name">Signature</div>
+    <div class="col-role">160deg · turquoise → profond<br>Vignettes POI · accents</div>
+  </div>
+</div>
+
+<!-- ═══ S7 : TYPOGRAPHIES ═══ -->
+<div class="sl" id="s7" style="padding:0">
+  <div class="ty-col" data-in="1">
+    <div class="ty-big marky">Aa</div>
+    <div class="ty-role">Titres &amp; Logo</div>
+    <div class="ty-sample m">Sillans</div>
+    <div class="ty-name">Marky Regular</div>
+    <div class="ty-usage">H1 · H2 · boutons principaux<br>Personnalité artistique, courbes originales</div>
+  </div>
+  <div class="ty-col" data-in="2">
+    <div class="ty-big outfit-b">Aa</div>
+    <div class="ty-role">Sous-titres</div>
+    <div class="ty-sample ob">Sentier</div>
+    <div class="ty-name">Outfit Bold</div>
+    <div class="ty-usage">Boutons · étiquettes · labels<br>Pivot entre titres et corps</div>
+  </div>
+  <div class="ty-col" data-in="3">
+    <div class="ty-big outfit">Aa</div>
+    <div class="ty-role">Corps de texte</div>
+    <div class="ty-sample or">Nature</div>
+    <div class="ty-name">Outfit Regular</div>
+    <div class="ty-usage">Paragraphes · descriptions<br>Lisibilité universelle · international</div>
+  </div>
+</div>
+
+<!-- ═══ S8 : LOGO ═══ -->
+<div class="sl" id="s8">
+  <div class="tag" data-in="1">Charte graphique · Logotype</div>
+  <h2 data-in="2">Le tracé du sentier</h2>
+  <div class="logo-row" data-in="3">
+    <div class="lv dark">
+      <img src="../images/logo.svg">
+      <div class="lv-title">Principale</div>
+      <div class="lv-desc">Fond bleu · typo claire · pointillés sentier</div>
+    </div>
+    <div class="lv light">
+      <img src="../images/logo.svg" style="filter:invert(1) hue-rotate(170deg) saturate(.8)">
+      <div class="lv-title">Inversée</div>
+      <div class="lv-desc">Fond clair · impression · flyers</div>
+    </div>
+    <div class="lv grad">
+      <img src="../images/logo.svg">
+      <div class="lv-title">Header App</div>
+      <div class="lv-desc">Format horizontal · barre de navigation</div>
+    </div>
+  </div>
+  <div class="logo-note" data-in="4">
+    Les <strong>pointillés</strong> symbolisent le cheminement physique — la cascade n'est qu'une étape du parcours
+  </div>
+</div>
+
+<!-- ═══ S9 : PARCOURS UTILISATEUR ═══ -->
+<div class="sl" id="s9">
+  <div class="tag" data-in="1">Parcours utilisateur</div>
+  <h2 data-in="2" style="font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;align-self:flex-start;margin-bottom:32px">Du parking à la cascade</h2>
+  <div class="journey" data-in="3">
+    <div class="jstep">
+      <div class="jb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg></div>
+      <div class="jname">Découverte</div><div class="jdesc">QR code / web</div>
+    </div>
+    <div class="jstep">
+      <div class="jb hi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <div class="jname">Accueil</div><div class="jdesc">Téléchargement offline</div><div class="jchip">D'accord/Non</div>
+    </div>
+    <div class="jstep">
+      <div class="jb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+      <div class="jname">Carte</div><div class="jdesc">Météo · interdictions</div>
+    </div>
+    <div class="jstep">
+      <div class="jb hi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3" fill="white" opacity=".5"/></svg></div>
+      <div class="jname">POI ×10</div><div class="jdesc">Galerie · texte · médiation</div>
+    </div>
+    <div class="jstep">
+      <div class="jb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <div class="jname">Validation</div><div class="jdesc">Confirmer · débloquer</div><div class="jchip">Confirmer</div>
+    </div>
+    <div class="jstep">
+      <div class="jb hi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M2 12s3-3 6-3 6 3 6 3 3 3 6 3"/><path d="M2 7s3-3 6-3 6 3 6 3 3 3 6 3"/></svg></div>
+      <div class="jname">Cascade</div><div class="jdesc">POI 6 · belvédère</div>
+    </div>
+    <div class="jstep">
+      <div class="jb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="12" width="4" height="9" rx="1" fill="white" opacity=".7"/><rect x="10" y="7" width="4" height="14" rx="1" fill="white"/><rect x="17" y="3" width="4" height="18" rx="1" fill="white" opacity=".7"/></svg></div>
+      <div class="jname">Bilan</div><div class="jdesc">Stats · distance · temps</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ S10 : ACCUEIL SCREEN ═══ -->
+<div class="sl phone-sl" id="s10">
+  <div class="pl-info">
+    <div class="ptag" data-in="1">Écran 1 · Accueil</div>
+    <h2 data-in="2">Offline<br><span style="color:var(--s)">dès le départ</span></h2>
+    <div class="uxp" data-in="3"><div class="uxd"></div><div class="uxt"><strong>Avertissement connectivité</strong><span>Aucun réseau sur le sentier — communiqué immédiatement</span></div></div>
+    <div class="uxp" data-in="4"><div class="uxd"></div><div class="uxt"><strong>Choix éclairé</strong><span>L'utilisateur garde le contrôle — téléchargement optionnel</span></div></div>
+    <div class="uxp" data-in="5"><div class="uxd"></div><div class="uxt"><strong>Feedback de progression</strong><span>Indicateur circulaire + redirection automatique</span></div></div>
+  </div>
+</div>
+
+<!-- ═══ S11 : CARTE SCREEN ═══ -->
+<div class="sl phone-sl" id="s11">
+  <div class="pl-info">
+    <div class="ptag" data-in="1">Écran 2 · Carte</div>
+    <h2 data-in="2">Hub central<br><span style="color:var(--s)">de navigation</span></h2>
+    <div class="uxp" data-in="3"><div class="uxd"></div><div class="uxt"><strong>Marqueurs différenciés</strong><span>Blanc = à faire · Bleu validé · Turquoise animé = prochain</span></div></div>
+    <div class="uxp" data-in="4"><div class="uxd"></div><div class="uxt"><strong>Météo + interdictions</strong><span>Informations contextuelles en temps réel</span></div></div>
+    <div class="uxp" data-in="5"><div class="uxd"></div><div class="uxt"><strong>Bottom sheet POI</strong><span>Bandeau animé depuis le bas · vignette · actions rapides</span></div></div>
+  </div>
+</div>
+
+<!-- ═══ S12 : POI + VALIDATION ═══ -->
+<div class="sl phone-sl" id="s12">
+  <div class="pl-info">
+    <div class="ptag" data-in="1">Écran 3 · POI &amp; Validation</div>
+    <h2 data-in="2">Médiation<br><span style="color:var(--s)">et gamification</span></h2>
+    <div class="uxp" data-in="3"><div class="uxd"></div><div class="uxt"><strong>Galerie + contenu hiérarchisé</strong><span>Photos · étape · titre Marky · corps Outfit</span></div></div>
+    <div class="uxp" data-in="4"><div class="uxd"></div><div class="uxt"><strong>Modal de confirmation</strong><span>Évite les validations accidentelles</span></div></div>
+    <div class="uxp" data-in="5"><div class="uxd"></div><div class="uxt"><strong>Glow du POI suivant</strong><span>Après validation · animation turquoise sur la carte</span></div></div>
+  </div>
+</div>
+
+<!-- ═══ S13 : UX CHOICES ═══ -->
+<div class="sl" id="s13">
+  <div class="tag" data-in="1">Choix UX/UI clés</div>
+  <h2 data-in="2" style="font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;align-self:flex-start;margin-bottom:28px">Pensé pour le terrain</h2>
+  <div class="ux-grid">
+    <div class="ux-c" data-in="3">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
+      <div class="ux-ct"><strong>Lisibilité extérieur</strong><span>#F2F2F2 · sans-sérif · contraste élevé</span><div class="ux-badge">Accessibilité</div></div>
+    </div>
+    <div class="ux-c" data-in="3">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><path d="M1 6l4 4 4-4M1 10h8M19 6l-2 2 2 2M3 10v4a4 4 0 004 4h10a4 4 0 000-8h-1"/></svg></div>
+      <div class="ux-ct"><strong>Mode hors-ligne</strong><span>PWA · Service Worker · préchargement</span><div class="ux-badge">Technique</div></div>
+    </div>
+    <div class="ux-c" data-in="4">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><path d="M18 11V6a2 2 0 00-2-2v0a2 2 0 00-2 2v0M14 10V4a2 2 0 00-2-2v0a2 2 0 00-2 2v2M10 10.5V6a2 2 0 00-2-2v0a2 2 0 00-2 2v8"/><path d="M18 11a2 2 0 114 0v3a8 8 0 01-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 012.83-2.82L7 15"/></svg></div>
+      <div class="ux-ct"><strong>Navigation à une main</strong><span>Footer ancré · cibles 44px · marche</span><div class="ux-badge">Ergonomie</div></div>
+    </div>
+    <div class="ux-c" data-in="4">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+      <div class="ux-ct"><strong>Carte comme ancre</strong><span>Retour carte en 1 tap depuis partout</span><div class="ux-badge">Architecture</div></div>
+    </div>
+    <div class="ux-c" data-in="5">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><path d="M5 3l14 9-14 9V3z" fill="rgba(72,173,204,.2)"/></svg></div>
+      <div class="ux-ct"><strong>Animations intentionnelles</strong><span>Swipe 0.32s · glow POI · scale modal</span><div class="ux-badge">Motion</div></div>
+    </div>
+    <div class="ux-c" data-in="5">
+      <div class="ux-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <div class="ux-ct"><strong>Universalité visuelle</strong><span>Icônes · pictogrammes · textes courts</span><div class="ux-badge">Inclusivité</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ S14 : TECHNOLOGIES ═══ -->
+<div class="sl" id="s14" style="padding:0">
+  <div class="tech-left">
+    <div class="tag" data-in="1">Technologies</div>
+    <h2 data-in="2" style="font-family:'Marky',sans-serif;font-size:clamp(28px,3.5vw,50px);color:#fff;margin-bottom:32px">Stack web<br><span style="color:var(--s)">sans dépendances</span></h2>
+    <div class="tech-list">
+      <div class="tl" data-in="3">
+        <div class="tl-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="tl-t"><strong>HTML · CSS · JavaScript</strong><span>Vanilla · maintenable · universel</span></div>
+      </div>
+      <div class="tl" data-in="4">
+        <div class="tl-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div class="tl-t"><strong>Carte statique optimisée</strong><span>PNG + markers CSS · sans API externe · offline</span></div>
+      </div>
+      <div class="tl" data-in="5">
+        <div class="tl-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
+        <div class="tl-t"><strong>API Météo</strong><span>Conditions temps réel pour le randonneur</span></div>
+      </div>
+      <div class="tl" data-in="6">
+        <div class="tl-ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <div class="tl-t"><strong>Service Worker (sw.js)</strong><span>Cache complet · fonctionne sans réseau</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tech-right">
+    <div class="pwa-badge" data-in="1">Progressive Web App</div>
+    <div class="pwa-feats" data-in="2">
+      <div class="pf-row">
+        <div class="pf-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg></div>
+        <div><div class="pf-t">Installable</div><div class="pf-d">iOS &amp; Android · sans store</div></div>
+      </div>
+      <div class="pf-row">
+        <div class="pf-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.8" stroke-linecap="round"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+        <div><div class="pf-t">Offline first</div><div class="pf-d">Fonctionne sans réseau</div></div>
+      </div>
+      <div class="pf-row">
+        <div class="pf-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(72,173,204,.8)" stroke-width="1.8" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z" fill="rgba(72,173,204,.2)"/></svg></div>
+        <div><div class="pf-t">GitHub Pages</div><div class="pf-d">Déploiement continu · 0€</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ S15 : CONCLUSION ═══ -->
+<div class="sl" id="s15">
+  <div class="glow"></div><div class="glow2"></div>
+  <div class="inner">
+    <img class="clogo" src="../images/logo.svg" data-in="1">
+    <h1 data-in="2">Un outil au service<br>du <em style="font-style:normal;color:var(--s)">sanctuaire</em></h1>
+    <div class="sub" data-in="3">Médiation numérique sobre · protection par la découverte</div>
+    <div class="val-row" data-in="4">
+      <div class="val-chip">Sobriété</div>
+      <div class="val-chip">Mobilité douce</div>
+      <div class="val-chip">Médiation</div>
+      <div class="val-chip">ENS protégé</div>
+    </div>
+    <div class="end-cta" data-in="5">Merci · Questions ?</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const SLIDES = Array.from(document.querySelectorAll('.sl'));
+const N = SLIDES.length;
+let cur = 0, busy = false;
+const PHONE_SLIDES = [9, 10, 11];
+
+const TRANS = [
+  ['in-fade','out-fade'],
+  ['in-left','out-left'],
+  ['in-scale','out-scale'],
+  ['in-wipe','out-wipe'],
+  ['in-circle','out-circle'],
+  ['in-left','out-left'],
+  ['in-up','out-up'],
+  ['in-scale','out-scale'],
+  ['in-wipe','out-wipe'],
+  ['in-left','out-left'],
+  ['in-left','out-left'],
+  ['in-left','out-left'],
+  ['in-circle','out-circle'],
+  ['in-wipe','out-wipe'],
+  ['in-fade','out-fade'],
+];
+const BACK_TRANS = Array(15).fill(['in-right','out-right']);
+
+const DUR = 650;
+const phone = document.getElementById('phone-persist');
+const screens = phone.querySelectorAll('.pscr');
+const screenMap = { 9: 'accueil', 10: 'carte', 11: 'poi' };
+
+function isPhoneSlide(i) { return PHONE_SLIDES.includes(i); }
+
+function updatePhone(next, prev, dir) {
+  const entering = isPhoneSlide(next);
+  const leaving  = isPhoneSlide(prev);
+
+  if (!entering && leaving) {
+    phone.style.opacity = '0';
+    phone.style.pointerEvents = 'none';
+    phone.classList.remove('show');
+    return;
+  }
+  if (entering) {
+    phone.classList.add('show');
+    phone.style.removeProperty('opacity');
+    phone.style.removeProperty('pointer-events');
+    const scrName = screenMap[next];
+    const curScr  = phone.querySelector('.pscr.pactive');
+    const nxtScr  = phone.querySelector(`[data-pscreen="${scrName}"]`);
+    if (curScr === nxtScr) return;
+    const inCls  = dir > 0 ? 'pin-left'  : 'pin-right';
+    const outCls = dir > 0 ? 'pout-left' : 'pout-right';
+    if (curScr) {
+      curScr.classList.add(outCls);
+      setTimeout(() => {
+        curScr.classList.remove('pactive', outCls);
+        curScr.style.display = 'none';
+      }, 400);
+    }
+    nxtScr.style.display = '';
+    nxtScr.classList.add('pactive', inCls);
+    setTimeout(() => nxtScr.classList.remove(inCls), 400);
+  }
+}
+
+function goTo(next, dir) {
+  if (busy || next < 0 || next >= N || next === cur) return;
+  busy = true;
+
+  const prev   = cur;
+  const outEl  = SLIDES[prev];
+  const inEl   = SLIDES[next];
+  const tc     = dir > 0 ? TRANS[prev] : BACK_TRANS[prev];
+  const [inC, outC] = tc || ['in-fade','out-fade'];
+
+  outEl.classList.remove('on');
+  outEl.classList.add('out', outC);
+  inEl.classList.add('on', inC);
+
+  updatePhone(next, prev, dir);
+
+  setTimeout(() => {
+    outEl.classList.remove('out', outC);
+    inEl.classList.remove(inC);
+    cur = next;
+    busy = false;
+    updateUI();
+  }, DUR);
+}
+
+function updateUI() {
+  document.getElementById('ctr').textContent = `${cur+1} / ${N}`;
+  document.getElementById('prog').style.width = (cur / (N-1) * 100) + '%';
+}
+
+document.getElementById('stage').addEventListener('click', () => goTo(cur+1, 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(cur+1, 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(cur-1, -1); }
+});
+let tx = 0;
+document.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e => {
+  const d = tx - e.changedTouches[0].clientX;
+  if (Math.abs(d) > 50) d > 0 ? goTo(cur+1,1) : goTo(cur-1,-1);
+}, {passive:true});
+
+const cur_ = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur_.style.left = e.clientX+'px'; cur_.style.top = e.clientY+'px'; });
+document.addEventListener('mousedown', () => cur_.classList.add('big'));
+document.addEventListener('mouseup', () => cur_.classList.remove('big'));
+
+updateUI();
+</script>
+</body>
+</html>
