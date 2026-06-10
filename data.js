@@ -149,8 +149,8 @@ var SILLANS_POIS = [
         tagBg: "#f4eee8", tagColor: "#6b4a1a",
         etape: "10 / 10", temps: "5 min", km: "3,3",
         images: [
+            { type: "video", src: "video/mairie.mp4", alt: "Vidéo de la mairie", grad: "linear-gradient(160deg,#cc9a6a,#8c6a3a)" },
             { src: "images/rue-sillans.webp", alt: "La mairie de Sillans",        grad: "linear-gradient(160deg,#cc9a6a,#8c6a3a)" },
-            { src: null,                      alt: "Façade de l'ancien château",  grad: "linear-gradient(160deg,#bc8a5a,#7c5a2a)" },
         ],
         description: [
             "L'actuelle mairie occupe les murs de l'ancien château seigneurial de Sillans. Édifié au Moyen Âge pour les seigneurs locaux, le bâtiment fut progressivement transformé après la Révolution française lorsque la commune en prit possession pour en faire le siège de son administration.",
