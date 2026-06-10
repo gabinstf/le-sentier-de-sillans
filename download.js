@@ -10,7 +10,7 @@
     const prohibBtn1      = document.getElementById('prohibBtn1');
     const prohibBtn2      = document.getElementById('prohibBtn2');
 
-    const CACHE_NAME = 'sentier-sillans-v6';
+    const CACHE_NAME = 'sentier-sillans-v7';
 
     const ASSETS = [
         'index.html', 'interet.html', 'accueil.html',
@@ -40,7 +40,8 @@
         'video/bastidon-oliveraie.mp4',
         'video/eglise.mp4',
         'video/tuf.mp4',
-        'video/panorama.mp4'
+        'video/panorama.mp4',
+        'video/apropos.mp4'
     ];
 
     let downloading    = false;
@@ -134,7 +135,7 @@
 
         function finishDownload() {
             localStorage.setItem('dlDone', '1');
-            localStorage.setItem('dlVersion', '6');
+            localStorage.setItem('dlVersion', '7');
 
             setTimeout(function () {
                 dlStateProgress.classList.add('dl-hidden');

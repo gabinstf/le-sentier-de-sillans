@@ -330,6 +330,26 @@ body {
     align-items: center;
     text-align: center;
     gap: 10px;
+    overflow: hidden;
+}
+
+.iap-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.iap-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(150deg, rgba(2,34,58,0.78) 0%, rgba(3,101,140,0.72) 100%);
+}
+
+.iap-hero > :not(.iap-hero-video):not(.iap-hero-overlay) {
+    position: relative;
+    z-index: 1;
 }
 
 .iap-hero-logo {
