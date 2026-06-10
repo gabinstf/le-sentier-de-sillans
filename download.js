@@ -9,6 +9,9 @@
     const dlBtnNo         = document.getElementById('dlBtnNo');
     const prohibBtn1      = document.getElementById('prohibBtn1');
     const prohibBtn2      = document.getElementById('prohibBtn2');
+    const langBtn         = document.getElementById('langBtn');
+    const langCurrent     = document.getElementById('langCurrent');
+    const langOther       = document.getElementById('langOther');
 
     const CACHE_NAME = APP_CACHE; // défini dans version.js
 
@@ -83,6 +86,7 @@
         dlWidget.classList.remove('prohib-open');
         prohibBtn1.classList.remove('prohib-open');
         prohibBtn2.classList.remove('prohib-open');
+        langBtn.classList.remove('prohib-open');
     }
 
     // ── Réinitialiser le widget téléchargement ────────────────────────────
@@ -184,6 +188,20 @@
         resetDlPanel();
     });
 
+    // ── Langue (démo visuelle : permute FR/EN, aucune traduction) ────────
+    addTapHandler(langBtn, function (e) {
+        const isOpen = langBtn.classList.contains('prohib-open');
+        if (isOpen && e.target === langOther) {
+            const tmp = langCurrent.textContent;
+            langCurrent.textContent = langOther.textContent;
+            langOther.textContent = tmp;
+            closeAll();
+            return;
+        }
+        closeAll();
+        if (!isOpen) langBtn.classList.add('prohib-open');
+    });
+
     // ── Interdiction 1 ────────────────────────────────────────────────────
     addTapHandler(prohibBtn1, function () {
         const isOpen = prohibBtn1.classList.contains('prohib-open');
@@ -202,7 +220,8 @@
     document.addEventListener('click', function (e) {
         if (!dlWidget.contains(e.target) &&
             !prohibBtn1.contains(e.target) &&
-            !prohibBtn2.contains(e.target)) {
+            !prohibBtn2.contains(e.target) &&
+            !langBtn.contains(e.target)) {
             closeAll();
         }
     });
