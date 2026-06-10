@@ -8,7 +8,6 @@ var SILLANS_POIS = [
         images: [
             { type: "video", src: "video/eglise.mp4", alt: "Vidéo de l'église de Sillans", grad: "linear-gradient(160deg,#48ADCC,#03658C)" },
             { src: "images/eglise.webp",  alt: "Façade de l'église de Sillans",  grad: "linear-gradient(160deg,#48ADCC,#03658C)" },
-            { src: null,                  alt: "Place du village",                grad: "linear-gradient(160deg,#6e8cad,#3a5a7a)" },
         ],
         description: [
             "L'église de Sillans-la-Cascade est le point de départ et de repère de ce sentier. Construite en pierres de taille provençales, elle domine la place principale du village et marque le cœur de la vie communale depuis plusieurs siècles.",
