@@ -120,7 +120,6 @@ var SILLANS_POIS = [
         etape: "8 / 10", temps: "5 min", km: "2,6",
         images: [
             { src: "images/gare.webp", alt: "L'ancienne gare de Sillans", grad: "linear-gradient(160deg,#cc7a5a,#8c4a2a)" },
-            { src: null,               alt: "Les anciens rails",          grad: "linear-gradient(160deg,#bc6a4a,#7c3a1a)" },
         ],
         description: [
             "Cette ancienne gare marquait le terminus de la ligne ferroviaire reliant Aups à Sillans-la-Cascade, inaugurée à la fin du XIXe siècle. Elle représentait alors un lien vital entre le village isolé et la sous-préfecture de Draguignan, facilitant le commerce, les déplacements et le désenclavement du haut-Var.",
