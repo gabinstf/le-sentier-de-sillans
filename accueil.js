@@ -33,8 +33,6 @@
         'images/carte.webp',
         'images/accueil-fond.webp',
         'images/logo-var.webp',
-        'images/baignade-interdite.webp',
-        'images/cigarette-interdiction.webp',
         'images/eglise.webp',
         'images/bastidon.webp',
         'images/tuff.webp',
