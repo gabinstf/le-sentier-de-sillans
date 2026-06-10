@@ -103,9 +103,8 @@ var SILLANS_POIS = [
         tagBg: "#e0f3f9", tagColor: "#03658C",
         etape: "7 / 10", temps: "5 min", km: "2,2",
         images: [
+            { type: "video", src: "video/bresque.mp4", alt: "Vidéo de la Bresque", grad: "linear-gradient(160deg,#2a9cad,#1a6c7c)" },
             { src: "images/riviere.webp", alt: "La Bresque et ses berges",       grad: "linear-gradient(160deg,#2a9cad,#1a6c7c)" },
-            { src: null,                  alt: "Faune aquatique de la Bresque",  grad: "linear-gradient(160deg,#3aacbd,#2a7c8c)" },
-            { src: null,                  alt: "Reflets dans l'eau claire",      grad: "linear-gradient(160deg,#4abccd,#2a8c9c)" },
         ],
         description: [
             "La Bresque prend sa source dans le massif des Maures et parcourt une quarantaine de kilomètres avant de rejoindre l'Argens. À Sillans, elle crée la cascade qui donne son nom au village et façonne un écosystème aquatique d'une richesse exceptionnelle.",
