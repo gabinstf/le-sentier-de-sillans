@@ -22,9 +22,11 @@ function buildGallery(poi) {
     poi.images.forEach(function(img, i) {
         const slide = document.createElement('div');
         slide.className = 'gallery-slide';
-        slide.innerHTML = img.src
-            ? '<img src="' + img.src + '" alt="' + img.alt + '">'
-            : '<div class="slide-placeholder" style="background:' + img.grad + '">' + PHOTO_ICON + '</div>';
+        slide.innerHTML = img.type === 'video'
+            ? '<video class="gallery-video" src="' + img.src + '" muted playsinline preload="auto"></video>'
+            : img.src
+                ? '<img src="' + img.src + '" alt="' + img.alt + '">'
+                : '<div class="slide-placeholder" style="background:' + img.grad + '">' + PHOTO_ICON + '</div>';
         track.appendChild(slide);
 
         const dot = document.createElement('div');
@@ -50,15 +52,38 @@ function goToSlide(index) {
     track.style.transform  = 'translateX(' + (-galleryIndex * wrapper.offsetWidth) + 'px)';
     Array.from(dots).forEach(function(d, i) { d.classList.toggle('active', i === galleryIndex); });
     updateCounter(currentPoi);
+    startAuto();
 }
 
 function stopAuto() {
     if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    Array.from(document.querySelectorAll('.gallery-video')).forEach(function(v) {
+        v.pause();
+        v.onended = null;
+    });
 }
 
 function startAuto() {
     stopAuto();
-    if (!currentPoi || currentPoi.images.length <= 1) return;
+    if (!currentPoi) return;
+    const current = currentPoi.images[galleryIndex];
+
+    if (current.type === 'video') {
+        const track = document.getElementById('galleryTrack');
+        const video = track.children[galleryIndex].querySelector('video');
+        if (video) {
+            video.currentTime = 0;
+            video.play().catch(function() {});
+            if (currentPoi.images.length > 1) {
+                video.onended = function() {
+                    goToSlide((galleryIndex + 1) % currentPoi.images.length);
+                };
+            }
+        }
+        return;
+    }
+
+    if (currentPoi.images.length <= 1) return;
     autoTimer = setInterval(function() {
         goToSlide((galleryIndex + 1) % currentPoi.images.length);
     }, 3000);
@@ -98,8 +123,9 @@ function initSwipe() {
             if (delta < -50)      goToSlide(galleryIndex + 1);
             else if (delta > 50)  goToSlide(galleryIndex - 1);
             else                  goToSlide(galleryIndex);
+        } else {
+            startAuto();
         }
-        startAuto();
     }
 
     wrapper.addEventListener('touchend',    onEnd, { passive: true });

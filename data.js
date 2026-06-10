@@ -22,9 +22,9 @@ var SILLANS_POIS = [
         tagBg: "#e8f4ee", tagColor: "#1a6b3a",
         etape: "2 / 10", temps: "5 min", km: "0,2",
         images: [
+            { type: "video", src: "video/bastidon-oliveraie.mp4", alt: "Le bastidon et son oliveraie", grad: "linear-gradient(160deg,#5a9c6e,#2a6c3e)" },
             { src: "images/bastidon.webp", alt: "Le bastidon provençal",  grad: "linear-gradient(160deg,#5a9c6e,#2a6c3e)" },
-            { src: null,                   alt: "Oliviers centenaires",   grad: "linear-gradient(160deg,#7aad6e,#3a7c4e)" },
-            { src: null,                   alt: "Vue sur l'oliveraie",    grad: "linear-gradient(160deg,#9cc47a,#5a8c4a)" },
+            { src: "images/oliveraie.webp", alt: "Vue sur l'oliveraie",   grad: "linear-gradient(160deg,#9cc47a,#5a8c4a)" },
         ],
         description: [
             "Ce bastidon — petite maison de campagne provençale — était le refuge des paysans durant les longues saisons de travail agricole. Entouré d'oliviers dont certains dépassent deux cents ans d'âge, il témoigne d'une exploitation de la terre inscrite dans la durée.",
