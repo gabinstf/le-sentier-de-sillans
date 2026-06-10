@@ -347,15 +347,9 @@ body {
     background: linear-gradient(150deg, rgba(2,34,58,0.78) 0%, rgba(3,101,140,0.72) 100%);
 }
 
-.iap-hero > :not(.iap-hero-video):not(.iap-hero-overlay) {
+.iap-hero > :not(.iap-hero-video):not(.iap-hero-overlay):not(.ip-back) {
     position: relative;
     z-index: 1;
-}
-
-.iap-hero-logo {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 4px;
 }
 
 .iap-hero-title {
