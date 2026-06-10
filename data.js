@@ -6,6 +6,7 @@ var SILLANS_POIS = [
         tagBg: "#e0f3f9", tagColor: "#03658C",
         etape: "1 / 10", temps: "3 min", km: "0,0",
         images: [
+            { type: "video", src: "video/eglise.mp4", alt: "Vidéo de l'église de Sillans", grad: "linear-gradient(160deg,#48ADCC,#03658C)" },
             { src: "images/eglise.webp",  alt: "Façade de l'église de Sillans",  grad: "linear-gradient(160deg,#48ADCC,#03658C)" },
             { src: null,                  alt: "Place du village",                grad: "linear-gradient(160deg,#6e8cad,#3a5a7a)" },
         ],
