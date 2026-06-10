@@ -62,14 +62,17 @@ body {
     padding: 18px 0;
 }
 
-/* ── Rappel ───────────────────────────────────────────────────────────── */
+/* ── Rappel (pastille) ────────────────────────────────────────────────── */
 .ac-rappel {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.08rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: white;
-    opacity: 0.92;
-    margin: 0;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 8px 18px;
+    margin: 0 0 18px;
 }
 
 /* ── Contenu initial ──────────────────────────────────────────────────── */
@@ -145,24 +148,6 @@ body {
     font-weight: 700;
 }
 
-.ac-sep {
-    width: 100%;
-    max-width: 310px;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-    margin-bottom: 12px;
-}
-
-.ac-more {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 600;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.75;
-}
-
 /* ── Logo Var ─────────────────────────────────────────────────────────── */
 .ac-footer {
     padding: 16px 0 48px;
@@ -180,7 +165,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 20px;
+    gap: 18px;
 }
 
 .ac-dl.active {
@@ -190,22 +175,23 @@ body {
 .ac-warning {
     font-family: 'Outfit', sans-serif;
     font-size: 0.95rem;
+    font-weight: 600;
     color: white;
     line-height: 1.6;
-    opacity: 0.88;
+    opacity: 0.92;
 }
 
 /* ── Cercle de progression ────────────────────────────────────────────── */
 .ac-ring-wrap {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 132px;
+    height: 132px;
     flex-shrink: 0;
 }
 
 .ac-ring-svg {
-    width: 150px;
-    height: 150px;
+    width: 132px;
+    height: 132px;
     transform: rotate(-90deg);
 }
 
@@ -231,7 +217,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: 'Marky', sans-serif;
-    font-size: 2.6rem;
+    font-size: 2.3rem;
     color: white;
     line-height: 1;
     white-space: nowrap;
@@ -241,7 +227,15 @@ body {
     pointer-events: none;
 }
 
-/* ── Textes fin de téléchargement ─────────────────────────────────────── */
+/* ── Textes fin de téléchargement (espace réservé : layout stable) ────── */
+.ac-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    min-height: 42px;
+}
+
 .ac-done {
     font-family: 'Outfit', sans-serif;
     font-size: 0.95rem;
@@ -260,3 +254,82 @@ body {
 }
 
 .ac-redirect.visible { visibility: visible; }
+
+/* ── Interdictions principales (pendant l'attente) ────────────────────── */
+.ac-rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.ac-rules-tag {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
+    animation-delay: calc(var(--stagger) * 1);
+}
+
+.ac-rule-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    padding: 12px 16px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: pageIn var(--dur-in) var(--ease-spring) both;
+}
+
+.ac-rule-card:nth-of-type(1) { animation-delay: calc(var(--stagger) * 2); }
+.ac-rule-card:nth-of-type(2) { animation-delay: calc(var(--stagger) * 3); }
+
+.ac-rule-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.ac-rule-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.ac-rule-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ac-rule-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+}
+
+.ac-rule-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.3;
+}

@@ -19,11 +19,9 @@
         <!-- Bloc central — flex:1, centré verticalement -->
         <div class="ac-main">
 
-            <!-- Rappel — toujours visible pendant le téléchargement aussi -->
-            <p class="ac-rappel">Rappel : aucune connexion sur le sentier</p>
-
             <!-- Contenu initial -->
             <div class="ac-initial" id="acInitial">
+                <p class="ac-rappel">Rappel : aucune connexion sur le sentier</p>
                 <p class="ac-desc">Pour profiter d'une expérience en temps réel sur le site, veuillez télécharger les données en amont.</p>
                 <div class="ac-btns">
                     <button class="ac-btn" id="acBtnOk">D'ACCORD</button>
@@ -33,13 +31,13 @@
                     <p><strong>En choisissant « d'accord »</strong>, la web app utilisera le stockage local de votre appareil pour précharger les données du site, garantissant un accès rapide et un fonctionnement même sans connexion. Idéal sur le sentier.</p>
                     <p><strong>En choisissant « non merci »</strong>, vous accéderez au site sans téléchargement. Ce sera cependant moins pratique sur le sentier, le site n'étant pas utilisable sans connexion.</p>
                 </div>
-                <hr class="ac-sep">
-                <p class="ac-more">EN SAVOIR PLUS SUR LE TÉLÉCHARGEMENT</p>
             </div>
 
             <!-- État téléchargement — masqué initialement -->
             <div class="ac-dl" id="acDl">
+
                 <p class="ac-warning">Veuillez ne pas fermer la page<br>pendant le téléchargement.</p>
+
                 <div class="ac-ring-wrap">
                     <svg class="ac-ring-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                         <circle class="ac-ring-track" cx="60" cy="60" r="52"/>
@@ -47,8 +45,44 @@
                     </svg>
                     <div class="ac-ring-label" id="acRingLabel">0</div>
                 </div>
-                <p class="ac-done" id="acDone">Téléchargement terminé.</p>
-                <p class="ac-redirect" id="acRedirect">Redirection en cours<span id="acDots">.</span></p>
+
+                <div class="ac-status">
+                    <p class="ac-done" id="acDone">Téléchargement terminé.</p>
+                    <p class="ac-redirect" id="acRedirect">Redirection en cours<span id="acDots">.</span></p>
+                </div>
+
+                <!-- Interdictions principales, affichées pendant l'attente -->
+                <div class="ac-rules">
+                    <p class="ac-rules-tag">À retenir sur le sentier</p>
+
+                    <div class="ac-rule-card">
+                        <div class="ac-rule-icon">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="14" cy="4" r="2" fill="#1A87AC"/>
+                                <path d="M3 11l4 1.5 4-5 4.5 2" stroke="#1A87AC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17c1.5-1.2 3-1.2 4.5 0s3 1.2 4.5 0 3-1.2 4.5 0 3 1.2 4.5 0" stroke="#1A87AC" stroke-width="2.4" stroke-linecap="round"/>
+                                <path d="M2 21c1.5-1.2 3-1.2 4.5 0s3 1.2 4.5 0 3-1.2 4.5 0 3 1.2 4.5 0" stroke="#1A87AC" stroke-width="2.4" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="ac-rule-body">
+                            <span class="ac-rule-title">Baignade interdite</span>
+                            <span class="ac-rule-sub">Cours d'eau protégé</span>
+                        </div>
+                    </div>
+
+                    <div class="ac-rule-card">
+                        <div class="ac-rule-icon">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" stroke="#C67C24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="ac-rule-body">
+                            <span class="ac-rule-title">Feu &amp; cigarettes interdits</span>
+                            <span class="ac-rule-sub">Risque d'incendie de forêt</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
